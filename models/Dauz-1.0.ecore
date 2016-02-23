@@ -2,14 +2,14 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dauz" nsURI="http://capgemini.com/dauz/1.0" nsPrefix="dauz">
   <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-    <details key="schemaLocation" value="C:\oomph\server\models\Dauz-1.0.ecore"/>
+    <details key="schemaLocation" value="https://raw.githubusercontent.com/themetalone/oomph-test-server/master/models/Dauz-1.0.ecore"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/oomph/setup/Enablement">
+    <details key="variableName" value="p2.dauz"/>
+    <details key="repository" value="file:///C:\oomph\server\plugins"/>
+    <details key="installableUnits" value="dauz.feature.group"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="DauzTask" eSuperTypes="../../org.eclipse.oomph.setup/model/Setup.ecore#//SetupTask">
-    <eAnnotations source="http://www.eclipse.org/oomph/setup/Enablement">
-      <details key="variableName" value="p2.dauz"/>
-      <details key="repository" value="jarfile:\\C:\oomph\server\tasks.zip!\"/>
-      <details key="installableUnits" value="dauz.feature.group"/>
-    </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/oomph/setup/ValidTriggers">
       <details key="triggers" value="BOOTSTRAP MANUAL"/>
     </eAnnotations>
