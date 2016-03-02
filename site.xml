@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/CommandLine_1.0.0.201603011436.jar" id="CommandLine" version="1.0.0.201603011436" os="win32">
+      <category name="task"/>
+   </feature>
+   <feature url="features/dauz_1.0.0.201603011436.jar" id="dauz" version="1.0.0.201603011436">
+      <category name="task"/>
+   </feature>
+   <feature url="features/trivial_1.0.0.201603011436.jar" id="trivial" version="1.0.0.201603011436"/>
+   <category-def name="task" label="Tasks"/>
+</site>
