@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/CommandLine_1.0.0.201603021022.jar" id="CommandLine" version="1.0.0.201603021022" os="win32">
-      <category name="task"/>
+   <feature url="features/CommandLine_1.0.0.201603081402.jar" id="CommandLine" version="1.0.0.201603081402">
+      <category name="tasks"/>
    </feature>
-   <feature url="features/dauz_1.0.0.201603021022.jar" id="dauz" version="1.0.0.201603021022">
-      <category name="task"/>
+   <feature url="features/dauz_1.0.0.201603081402.jar" id="dauz" version="1.0.0.201603081402">
+      <category name="tasks"/>
    </feature>
-   <category-def name="task" label="Tasks"/>
+   <category-def name="tasks" label="Tasks">
+      <description>
+         Oomph Setup Task Extensions
+      </description>
+   </category-def>
 </site>
