@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/CommandLine_1.0.0.201603081402.jar" id="CommandLine" version="1.0.0.201603081402">
+   <feature url="features/CommandLine_1.0.0.201604051344.jar" id="CommandLine" version="1.0.0.201604051344">
       <category name="tasks"/>
    </feature>
-   <feature url="features/dauz_1.0.0.201603081402.jar" id="dauz" version="1.0.0.201603081402">
+   <feature url="features/DownloadTask_1.0.0.201604051344.jar" id="DownloadTask" version="1.0.0.201604051344">
+      <category name="tasks"/>
+   </feature>
+   <feature url="features/UnzipTask_1.0.0.201604051344.jar" id="UnzipTask" version="1.0.0.201604051344">
       <category name="tasks"/>
    </feature>
    <category-def name="tasks" label="Tasks">
