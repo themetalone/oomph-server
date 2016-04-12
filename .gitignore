@@ -2,8 +2,3 @@ ide.zip
 logs.zip
 scripts.zip
 vm.zip
-plugins/*.jar
-features/trivial_1.0.0.201603011436.jar
-features/*.jar
-artifacts.jar
-content.jar
