@@ -2,12 +2,12 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="unziptask" nsURI="http://www.example.org/UnzipTask/1.0" nsPrefix="unziptask">
   <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-    <details key="schemaLocation" value="file:///C:/oomph/server/model/Unziptask-1.0.ecore"/>
+    <details key="schemaLocation" value="https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Unziptask-1.0.ecore"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="UnzipTask" eSuperTypes="http://www.eclipse.org/oomph/setup/1.0#//SetupTask">
     <eAnnotations source="http://www.eclipse.org/oomph/setup/Enablement">
       <details key="variableName" value="p2.unzip"/>
-      <details key="repository" value="file:///C:/oomph/server"/>
+      <details key="repository" value="https://github.com/themetalone/oomph-server/raw/master/server.zip"/>
       <details key="installableUnits" value="UnzipTask.feature.group"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/oomph/setup/ValidTriggers">

@@ -3,13 +3,13 @@
    <description name="Cobiclipse Setup Task Extension">
       Provides some useful oomph setup task extensions
    </description>
-   <feature url="features/CommandLine_1.0.0.201604121029.jar" id="CommandLine" version="1.0.0.201604121029">
+   <feature url="features/CommandLine_1.0.0.201604121205.jar" id="CommandLine" version="1.0.0.201604121205">
       <category name="Setup Tasks"/>
    </feature>
-   <feature url="features/DownloadTask_1.0.0.201604121029.jar" id="DownloadTask" version="1.0.0.201604121029">
+   <feature url="features/DownloadTask_1.0.0.201604121205.jar" id="DownloadTask" version="1.0.0.201604121205">
       <category name="Setup Tasks"/>
    </feature>
-   <feature url="features/UnzipTask_1.0.0.201604121029.jar" id="UnzipTask" version="1.0.0.201604121029">
+   <feature url="features/UnzipTask_1.0.0.201604121205.jar" id="UnzipTask" version="1.0.0.201604121205">
       <category name="Setup Tasks"/>
    </feature>
    <category-def name="Setup Tasks" label="New Category 1"/>
