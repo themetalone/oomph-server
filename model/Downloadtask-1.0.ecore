@@ -8,7 +8,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="DownloadTask" eSuperTypes="http://www.eclipse.org/oomph/setup/1.0#//SetupTask">
     <eAnnotations source="http://www.eclipse.org/oomph/setup/Enablement">
       <details key="variableName" value="p2.download"/>
-      <details key="repository" value="https://github.com/themetalone/oomph-server/raw/master/server.zip"/>
+      <details key="repository" value="jar:https://github.com/themetalone/oomph-server/raw/master/server.zip!/"/>
       <details key="installableUnits" value="DownloadTask.feature.group"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/oomph/setup/ValidTriggers">
