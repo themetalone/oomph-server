@@ -1,7 +1,137 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>Private Update Site</groupId>
-  <artifactId>Private Update Site</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>Cobiclipse Setup Tasks</name>
+  <groupId>com.capgemini</groupId>
+  <artifactId>oomph.setuptasks</artifactId>
+  <version>0.0.0</version>
+  <packaging>eclipse-repository</packaging>
+
+  <properties>
+    <eclipse-repo.url>http://download.eclipse.org/releases/juno</eclipse-repo.url>
+    <tycho.version>0.20.0</tycho.version>
+    <tycho-extras.version>0.20.0</tycho-extras.version>
+    <tycho-repo.url>https://oss.sonatype.org/content/groups/public/</tycho-repo.url>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-packaging-plugin</artifactId>
+        <version>${tycho-extras.version}</version>
+        <configuration>
+          <archiveSite>true</archiveSite>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-p2-repository-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <!--<configuration>
+          <includeAllDependencies>true</includeAllDependencies>
+          </configuration> -->
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-p2-director-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <executions>
+          <execution>
+            <id>create-product-distributions</id>
+            <goals>
+              <goal>materialize-products</goal>
+              <goal>archive-products</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-maven-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+    
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>target-platform-configuration</artifactId>
+          <version>${tycho.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-compiler-plugin</artifactId>
+          <version>${tycho.version}</version>
+          <configuration>
+            <compilerArguments>
+              <inlineJSR/>
+              <enableJavadoc/>
+              <encoding>${project.build.sourceEncoding}</encoding>
+            </compilerArguments>
+          </configuration>
+        </plugin>
+        <!--<plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-surefire-plugin</artifactId>
+          <version>${tycho.version}</version>
+          </plugin> -->
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-source-plugin</artifactId>
+          <version>${tycho.version}</version>
+          <configuration>
+            <strictSrcIncludes>false</strictSrcIncludes>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho.extras</groupId>
+          <artifactId>tycho-source-feature-plugin</artifactId>
+          <version>${tycho-extras.version}</version>
+        </plugin>
+        <!--<plugin>
+          <groupId>org.eclipse.tycho.extras</groupId>
+          <artifactId>tycho-custom-bundle-plugin</artifactId>
+          <version>${tycho-extras.version}</version>
+          </plugin> -->
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-plugin</artifactId>
+          <version>${tycho.version}</version>
+          <configuration>
+            <baselineMode>warn</baselineMode>
+            <baselineReplace>none</baselineReplace>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>  
+  </build>
+  
+  <repositories>
+    <repository>
+      <id>eclipse platform</id>
+      <layout>p2</layout>
+      <url>${eclipse-repo.url}</url>
+    </repository>
+  </repositories>
+ <pluginRepositories>
+    <pluginRepository>
+      <id>tycho</id>
+      <url>${tycho-repo.url}</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 </project>

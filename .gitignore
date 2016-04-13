@@ -4,3 +4,9 @@ scripts.zip
 vm.zip
 /target/
 /bin/
+features/
+plugins/
+artifacts.jar
+category.xml
+content.jar
+site.xml
