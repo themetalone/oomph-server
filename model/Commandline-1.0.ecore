@@ -2,11 +2,11 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cmd" nsURI="http://www.example.org/CommandLine/1.0" nsPrefix="cmd">
   <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-    <details key="schemaLocation" value="file:///C:/oomph/server/model/Commandline-1.0.ecore"/>
+    <details key="schemaLocation" value="http://raw.githubusercontent.com/themetalone/oomph-server/master/model/Commandline-1.0.ecore"/>
   </eAnnotations>
   <eAnnotations source="http://www.eclipse.org/oomph/setup/Enablement">
     <details key="variableName" value="p2.cmd"/>
-    <details key="repository" value="file:///C:/oomph/server/"/>
+    <details key="repository" value="jar:file:./CommandLineTaskUpdate.zip!/"/>
     <details key="installableUnits" value="CommandLine.feature.group"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="CmdTask" eSuperTypes="http://www.eclipse.org/oomph/setup/1.0#//SetupTask">
