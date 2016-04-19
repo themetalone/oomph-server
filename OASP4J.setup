@@ -61,13 +61,16 @@
   <setupTask
       xsi:type="downloadtask:DownloadTask"
       id="download.oasp"
+      excludedTriggers="STARTUP"
       resourceLocation="https://github.com/oasp/oasp4j-ide/archive/master.zip"
       isURL="true"
+      readTimeout="5000"
       destinationPath="${temp.download}"
       destinationFile="oasp.zip"/>
   <setupTask
       xsi:type="unziptask:UnzipTask"
       id="unzip.oasp"
+      excludedTriggers="STARTUP"
       zipFile="${temp.download}/oasp.zip"
       destinationDir="${temp.download}"/>
   <setupTask
@@ -76,7 +79,7 @@
       excludedTriggers="STARTUP"
       resourceLocation="http://archive.apache.org/dist/ant/binaries/apache-ant-1.9.7-bin.zip"
       isURL="true"
-      readTimeout="1000"
+      readTimeout="5000"
       destinationPath="${temp.download}"
       destinationFile="ant.zip"
       estimatedSize="8">
@@ -98,7 +101,7 @@
       excludedTriggers="STARTUP"
       resourceLocation="https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/2.3.0/elasticsearch-2.3.0.zip"
       isURL="true"
-      readTimeout="2000"
+      readTimeout="5000"
       destinationPath="${temp.download}"
       destinationFile="elasticsearch.zip"
       estimatedSize="27">
@@ -117,6 +120,7 @@
       excludedTriggers="STARTUP"
       resourceLocation="https://download.elastic.co/logstash/logstash/logstash-2.3.0.zip"
       isURL="true"
+      readTimeout="5000"
       destinationPath="${temp.download}"
       destinationFile="logstash.zip"
       estimatedSize="77">
@@ -131,32 +135,11 @@
       destinationDir="${installation.location}"/>
   <setupTask
       xsi:type="downloadtask:DownloadTask"
-      id="download.nodejs"
-      excludedTriggers="STARTUP"
-      resourceLocation="https://nodejs.org/dist/v4.4.2/win-x64/node.exe"
-      isURL="true"
-      destinationPath="${temp.download}"
-      destinationFile="nodejs-4-4-2-x64.exe"
-      estimatedSize="14">
-    <description>Downloads the nodejs 4.4.2  x64 exe</description>
-  </setupTask>
-  <setupTask
-      xsi:type="downloadtask:DownloadTask"
-      id="download.python"
-      excludedTriggers="STARTUP"
-      resourceLocation="https://www.python.org/ftp/python/2.7.11/python-2.7.11.amd64.msi"
-      isURL="true"
-      destinationPath="${temp.download}"
-      destinationFile="python-2-7-11-amd64.msi"
-      estimatedSize="19">
-    <description>Downloads the python 2.7.11 amd64 msi</description>
-  </setupTask>
-  <setupTask
-      xsi:type="downloadtask:DownloadTask"
       id="download.maven"
       excludedTriggers="STARTUP"
       resourceLocation="http://www-us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip"
       isURL="true"
+      readTimeout="5000"
       destinationPath="${temp.download}"
       destinationFile="maven.zip"
       estimatedSize="8">
@@ -175,6 +158,7 @@
       excludedTriggers="STARTUP"
       resourceLocation="http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.8/bin/apache-tomcat-7.0.8-windows-x64.zip"
       isURL="true"
+      readTimeout="5000"
       destinationPath="${temp.download}"
       destinationFile="tomcat.zip"
       estimatedSize="9">
@@ -451,6 +435,51 @@
         value="${installation.location.win}\maven\bin\mvn"
         storageURI="scope://Installation"/>
     <setupTask
+        xsi:type="setup:VariableTask"
+        name="${eclipse-configurator.version}"
+        value="1.4.0-SNAPSHOT"/>
+    <setupTask
+        xsi:type="downloadtask:DownloadTask"
+        id="download.nodejs"
+        excludedTriggers="STARTUP"
+        resourceLocation="https://nodejs.org/dist/v4.4.3/node-v4.4.3-x64.msi"
+        isURL="true"
+        readTimeout="5000"
+        destinationPath="${temp.download}"
+        destinationFile="nodejs.msi"
+        estimatedSize="14">
+      <description>Downloads the nodejs 4.4.2  x64 exe</description>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="run.nodejs"
+        excludedTriggers="STARTUP"
+        predecessor="download.nodejs"
+        command="msiexec">
+      <argument>/i</argument>
+      <argument>${temp.download.win}\nodejs.msi</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="downloadtask:DownloadTask"
+        id="download.python"
+        excludedTriggers="STARTUP"
+        resourceLocation="https://www.python.org/ftp/python/2.7.11/python-2.7.11.amd64.msi"
+        isURL="true"
+        destinationPath="${temp.download}"
+        destinationFile="python.msi"
+        estimatedSize="19">
+      <description>Downloads the python 2.7.11 amd64 msi</description>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="run.python"
+        excludedTriggers="STARTUP"
+        predecessor="download.python"
+        command="msiexec">
+      <argument>/i</argument>
+      <argument>${temp.download.win}\python.msi</argument>
+    </setupTask>
+    <setupTask
         xsi:type="cmd:CmdTask"
         id="rename.ant"
         excludedTriggers="STARTUP"
@@ -542,11 +571,12 @@
         predecessor="package.oasp"
         command="move">
       <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-eclipse-configurator\target\oasp4j-ide-eclipse-configurator-1.4.0-SNAPSHOT.jar</argument>
-      <argument>${installation.root}\scripts\</argument>
+      <argument>${installation.root}\scripts</argument>
     </setupTask>
     <setupTask
         xsi:type="cmd:CmdTask"
         id="mkdir.software.java"
+        excludedTriggers="STARTUP"
         command="mkdir">
       <argument>${installation.location.win}\java\</argument>
     </setupTask>
@@ -564,6 +594,7 @@
     <setupTask
         xsi:type="downloadtask:DownloadTask"
         id="download.help"
+        excludedTriggers="STARTUP"
         resourceLocation="https://raw.githubusercontent.com/themetalone/oomph-server/master/help.bat"
         isURL="true"
         destinationPath="${installation.root}"
@@ -572,7 +603,8 @@
         xsi:type="cmd:CmdTask"
         id="update.all.workspaces"
         predecessor="xcopy.oasp.scripts move.oasp.settings move.oasp.eclipse xcopy.java download.help"
-        command="chdir">
+        command="chdir"
+        priority="1000">
       <argument>${installation.root}\</argument>
       <argument>&amp;&amp;</argument>
       <argument>help.bat</argument>
