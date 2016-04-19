@@ -3,12 +3,13 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:cmd="http://www.example.org/CommandLine/1.0"
     xmlns:downloadtask="http://www.example.org/DownloadTask/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
     xmlns:unziptask="http://www.example.org/UnzipTask/1.0"
-    xsi:schemaLocation="http://www.example.org/DownloadTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Downloadtask-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.example.org/UnzipTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Unziptask-1.0.ecore"
+    xsi:schemaLocation="http://www.example.org/CommandLine/1.0 file:///C:/oomph/server/model/Commandline-1.0.ecore http://www.example.org/DownloadTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Downloadtask-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.example.org/UnzipTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Unziptask-1.0.ecore"
     name="oasp4j"
     label="OASP4J">
   <annotation
@@ -53,57 +54,33 @@
     <description>Specifies where temporary data will be stored</description>
   </setupTask>
   <setupTask
-      xsi:type="downloadtask:DownloadTask"
-      id="download.scripts"
-      excludedTriggers="STARTUP"
-      resourceLocation="${resource.location}/scripts.zip"
-      destinationPath="${temp.download}"
-      destinationFile="scripts.zip"
-      priority="100">
-    <description>Copies the scripts.zip</description>
-  </setupTask>
-  <setupTask
-      xsi:type="unziptask:UnzipTask"
-      id="unzip.scripts"
-      excludedTriggers="STARTUP"
-      predecessor="download.scripts"
-      zipFile="${temp.download}/scripts.zip"
-      destinationDir="${installation.root}"
-      priority="100">
-    <description>Unzips the scripts archive</description>
-  </setupTask>
+      xsi:type="setup:VariableTask"
+      name="workspace.location"
+      value="${workspace.container}/master"
+      storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="downloadtask:DownloadTask"
-      id="download.ide"
-      excludedTriggers="STARTUP"
-      resourceLocation="${resource.location}/ide.zip"
+      id="download.oasp"
+      resourceLocation="https://github.com/oasp/oasp4j-ide/archive/master.zip"
+      isURL="true"
       destinationPath="${temp.download}"
-      destinationFile="ide.zip"
-      priority="100">
-    <description>Copies the ide.zip</description>
-  </setupTask>
+      destinationFile="oasp.zip"/>
   <setupTask
       xsi:type="unziptask:UnzipTask"
-      id="unzip.ide"
-      excludedTriggers="STARTUP"
-      predecessor="download.ide"
-      filter=""
-      zipFile="${temp.download}/ide.zip"
-      destinationDir="${installation.root}"
-      priority="100">
-    <description>Unzips the ide archive</description>
-  </setupTask>
+      id="unzip.oasp"
+      zipFile="${temp.download}/oasp.zip"
+      destinationDir="${temp.download}"/>
   <setupTask
       xsi:type="downloadtask:DownloadTask"
       id="download.ant"
       excludedTriggers="STARTUP"
-      resourceLocation="http://www-eu.apache.org/dist//ant/binaries/apache-ant-1.9.6-bin.zip"
+      resourceLocation="http://archive.apache.org/dist/ant/binaries/apache-ant-1.9.7-bin.zip"
       isURL="true"
       readTimeout="1000"
       destinationPath="${temp.download}"
       destinationFile="ant.zip"
       estimatedSize="8">
-    <description>Downloads the ant 1.9.6 archive</description>
+    <description>Downloads the ant 1.9.7 archive</description>
   </setupTask>
   <setupTask
       xsi:type="unziptask:UnzipTask"
@@ -196,7 +173,7 @@
       xsi:type="downloadtask:DownloadTask"
       id="download.tomcat"
       excludedTriggers="STARTUP"
-      resourceLocation="http://www-eu.apache.org/dist/tomcat/tomcat-7/v7.0.68/bin/apache-tomcat-7.0.68.zip"
+      resourceLocation="http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.8/bin/apache-tomcat-7.0.8-windows-x64.zip"
       isURL="true"
       destinationPath="${temp.download}"
       destinationFile="tomcat.zip"
@@ -213,12 +190,12 @@
     <description></description>
   </setupTask>
   <setupTask
-      xsi:type="setup:InstallationTask"
-      id="installation"/>
-  <setupTask
       xsi:type="jdt:JRETask"
       version="JavaSE-1.7"
       location="${jre.location-1.7}"/>
+  <setupTask
+      xsi:type="setup:InstallationTask"
+      id="installation"/>
   <setupTask
       xsi:type="setup.p2:P2Task"
       label="${scope.product.label} (${scope.product.version.label})">
@@ -439,49 +416,168 @@
         url="https://marketplace.yatta.de/update/profiles/client"/>
   </setupTask>
   <version name="mars"
-      label="Mars"
-      requiredJavaVersion="1.7">
-    <description>OASP4J for Mars.</description>
-  </version>
-  <version name="Corp Mars"
-      label="corpMars"
+      label="Mars Windows"
       requiredJavaVersion="1.7">
     <setupTask
-        xsi:type="downloadtask:DownloadTask"
-        id="download.vm"
-        excludedTriggers="STARTUP"
-        resourceLocation="${resource.location}/vm.zip"
-        destinationPath="${temp.download}"
-        destinationFile="vm.zip"
-        priority="100">
-      <description>Copies the java vm</description>
-    </setupTask>
-    <setupTask
-        xsi:type="unziptask:UnzipTask"
-        id="unzip.vm"
-        excludedTriggers="STARTUP"
-        predecessor="download.vm"
-        zipFile="${temp.download}/vm.zip"
-        destinationDir="${installation.root}"
-        priority="100">
-      <description>Unzips the java vm</description>
+        xsi:type="setup:VariableTask"
+        id="installation.location.win"
+        name="installation.location.win"
+        value="${installation.root}\software"
+        storageURI="scope://Installation">
+      <description></description>
     </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
-        name="jre.location-1.7"
-        value="${installation.location}/java"
+        name="workspace.container"
+        value="${installation.root}\workspaces"
         storageURI="scope://Installation"
         label=""/>
     <setupTask
-        xsi:type="setup.p2:P2Task">
-      <requirement
-          name="cobigen-eclipse-feature.feature.group"
-          versionRange="[1.4.3,2.0.0)"
-          optional="true"/>
-      <repository
-          url="jar:file:////de-file10/ClientPE/OASP/CobiGenerator/Releases/stable/cobigen-eclipse.zip!/"/>
+        xsi:type="setup:VariableTask"
+        id=""
+        name="temp.download.win"
+        value="${installation.root}\temp"
+        storageURI="scope://Installation">
+      <description>Specifies where temporary data will be stored</description>
     </setupTask>
-    <description>Eclipse Mars with own java vm</description>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="oasp.settings"
+        value="${workspace.container}\main"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="path.maven"
+        name="path.maven"
+        value="${installation.location.win}\maven\bin\mvn"
+        storageURI="scope://Installation"/>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="rename.ant"
+        excludedTriggers="STARTUP"
+        predecessor="unzip.ant"
+        command="rename">
+      <argument>${installation.location.win}\apache-ant-1.9.7</argument>
+      <argument>ant</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="rename.maven"
+        excludedTriggers="STARTUP"
+        predecessor="unzip.maven"
+        command="rename">
+      <argument>${installation.location.win}\apache-maven-3.3.9</argument>
+      <argument>maven</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="rename.tomcat"
+        excludedTriggers="STARTUP"
+        predecessor="unzip.tomcat"
+        command="rename">
+      <argument>${installation.location.win}\apache-tomcat-7.0.8</argument>
+      <argument>tomcat</argument>
+      <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="rename.elasticsearch"
+        excludedTriggers="STARTUP"
+        predecessor="unzip.elasticsearch"
+        command="rename">
+      <argument>${installation.location.win}\elasticsearch-2.3.0</argument>
+      <argument>elasticsearch</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="rename.logstash"
+        excludedTriggers="STARTUP"
+        predecessor="unzip.logstash"
+        command="rename">
+      <argument>${installation.location.win}\logstash-2.3.0</argument>
+      <argument>logstash</argument>
+      <description>rename.logstash</description>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="mkdir.oasp.settings"
+        excludedTriggers="STARTUP"
+        command="mkdir">
+      <argument>${workspace.container}\main\development</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="move.oasp.settings"
+        excludedTriggers="STARTUP"
+        predecessor="unzip.oasp mkdir.oasp.settings"
+        command="move">
+      <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-settings\src\main\settings</argument>
+      <argument>${oasp.settings}\development\</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="xcopy.oasp.scripts"
+        excludedTriggers="STARTUP"
+        predecessor="unzip.oasp"
+        command="xcopy">
+      <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-scripts\src\main\resources\*</argument>
+      <argument>${installation.root}</argument>
+      <argument>/E</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="package.oasp"
+        excludedTriggers="STARTUP"
+        predecessor="unzip.oasp"
+        command="chdir">
+      <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-eclipse-configurator\</argument>
+      <argument>&amp;&amp;</argument>
+      <argument>${path.maven}</argument>
+      <argument>package</argument>
+      <argument>-B</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="move.oasp.eclipse"
+        excludedTriggers="STARTUP"
+        predecessor="package.oasp"
+        command="move">
+      <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-eclipse-configurator\target\oasp4j-ide-eclipse-configurator-1.4.0-SNAPSHOT.jar</argument>
+      <argument>${installation.root}\scripts\</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="mkdir.software.java"
+        command="mkdir">
+      <argument>${installation.location.win}\java\</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="xcopy.java"
+        excludedTriggers="STARTUP"
+        command="xcopy">
+      <argument>${jre.location-1.7}\*</argument>
+      <argument>${installation.location.win}\java\</argument>
+      <argument>/E</argument>
+      <argument>/I</argument>
+      <argument>/Y</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="downloadtask:DownloadTask"
+        id="download.help"
+        resourceLocation="https://raw.githubusercontent.com/themetalone/oomph-server/master/help.bat"
+        isURL="true"
+        destinationPath="${installation.root}"
+        destinationFile="help.bat"/>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="update.all.workspaces"
+        predecessor="xcopy.oasp.scripts move.oasp.settings move.oasp.eclipse xcopy.java download.help"
+        command="chdir">
+      <argument>${installation.root}\</argument>
+      <argument>&amp;&amp;</argument>
+      <argument>help.bat</argument>
+    </setupTask>
+    <description>OASP4J for Mars.</description>
   </version>
   <description>OASP4J provides cool stuff.</description>
 </setup:Product>
