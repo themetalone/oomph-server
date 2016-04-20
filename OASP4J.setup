@@ -9,7 +9,7 @@
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
     xmlns:unziptask="http://www.example.org/UnzipTask/1.0"
-    xsi:schemaLocation="http://www.example.org/CommandLine/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Commandline-1.0.ecore http://www.example.org/DownloadTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Downloadtask-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.example.org/UnzipTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Unziptask-1.0.ecore"
+    xsi:schemaLocation="http://www.example.org/CommandLine/1.0 file:///C:/oomph/server/model/Commandline-1.0.ecore http://www.example.org/DownloadTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Downloadtask-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.example.org/UnzipTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Unziptask-1.0.ecore"
     name="oasp4j"
     label="OASP4J">
   <annotation
@@ -442,12 +442,12 @@
         xsi:type="downloadtask:DownloadTask"
         id="download.nodejs"
         excludedTriggers="STARTUP"
-        resourceLocation="https://nodejs.org/dist/v4.4.3/node-v4.4.3-x64.msi"
+        resourceLocation="https://github.com/garethflowers/nodejs-portable/releases/download/v4.2.1/NodeJSPortable_4.2.1.paf.exe"
         isURL="true"
         readTimeout="5000"
         destinationPath="${temp.download}"
-        destinationFile="nodejs.msi"
-        estimatedSize="14">
+        destinationFile="nodejs.exe"
+        estimatedSize="6">
       <description>Downloads the nodejs 4.4.2  x64 exe</description>
     </setupTask>
     <setupTask
@@ -455,19 +455,16 @@
         id="run.nodejs"
         excludedTriggers="STARTUP"
         predecessor="download.nodejs"
-        command="msiexec">
-      <argument>/i</argument>
-      <argument>${temp.download.win}\nodejs.msi</argument>
-    </setupTask>
+        command="${temp.download.win}\nodejs.exe"/>
     <setupTask
         xsi:type="downloadtask:DownloadTask"
         id="download.python"
         excludedTriggers="STARTUP"
-        resourceLocation="https://www.python.org/ftp/python/2.7.11/python-2.7.11.amd64.msi"
+        resourceLocation="http://ftp.nluug.nl/languages/python/portablepython/v2.7/PortablePython_2.7.6.1.exe"
         isURL="true"
         destinationPath="${temp.download}"
         destinationFile="python.msi"
-        estimatedSize="19">
+        estimatedSize="225">
       <description>Downloads the python 2.7.11 amd64 msi</description>
     </setupTask>
     <setupTask
@@ -475,10 +472,7 @@
         id="run.python"
         excludedTriggers="STARTUP"
         predecessor="download.python"
-        command="msiexec">
-      <argument>/i</argument>
-      <argument>${temp.download.win}\python.msi</argument>
-    </setupTask>
+        command="${temp.download.win}\python.exe"/>
     <setupTask
         xsi:type="cmd:CmdTask"
         id="rename.ant"
@@ -599,6 +593,21 @@
         isURL="true"
         destinationPath="${installation.root}"
         destinationFile="help.bat"/>
+    <setupTask
+        xsi:type="downloadtask:DownloadTask"
+        id="download.install.report"
+        excludedTriggers="STARTUP"
+        resourceLocation=""/>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="installreport"
+        excludedTriggers="STARTUP"
+        predecessor="download.install.report"
+        command="chdir">
+      <argument>${installation.root}</argument>
+      <argument>&amp;&amp;</argument>
+      <argument>install_report_win.bat</argument>
+    </setupTask>
     <setupTask
         xsi:type="cmd:CmdTask"
         id="update.all.workspaces"
