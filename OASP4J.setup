@@ -68,12 +68,6 @@
       destinationPath="${temp.download}"
       destinationFile="oasp.zip"/>
   <setupTask
-      xsi:type="unziptask:UnzipTask"
-      id="unzip.oasp"
-      excludedTriggers="STARTUP"
-      zipFile="${temp.download}/oasp.zip"
-      destinationDir="${temp.download}"/>
-  <setupTask
       xsi:type="downloadtask:DownloadTask"
       id="download.ant"
       excludedTriggers="STARTUP"
@@ -84,16 +78,6 @@
       destinationFile="ant.zip"
       estimatedSize="8">
     <description>Downloads the ant 1.9.7 archive</description>
-  </setupTask>
-  <setupTask
-      xsi:type="unziptask:UnzipTask"
-      id="unzip.ant"
-      excludedTriggers="STARTUP"
-      predecessor="download.ant"
-      filter=""
-      zipFile="${temp.download}/ant.zip"
-      destinationDir="${installation.location}">
-    <description>Unzips the ant archive</description>
   </setupTask>
   <setupTask
       xsi:type="downloadtask:DownloadTask"
@@ -108,13 +92,6 @@
     <description>Download the elasticsearch 2.3 archive</description>
   </setupTask>
   <setupTask
-      xsi:type="unziptask:UnzipTask"
-      id="unzip.elasticsearch"
-      excludedTriggers="STARTUP"
-      predecessor="download.elasticsearch"
-      zipFile="${temp.download}/elasticsearch.zip"
-      destinationDir="${installation.location}"/>
-  <setupTask
       xsi:type="downloadtask:DownloadTask"
       id="download.logstash"
       excludedTriggers="STARTUP"
@@ -126,13 +103,6 @@
       estimatedSize="77">
     <description>Downloads logstash 2.3</description>
   </setupTask>
-  <setupTask
-      xsi:type="unziptask:UnzipTask"
-      id="unzip.logstash"
-      excludedTriggers="STARTUP"
-      predecessor="download.logstash"
-      zipFile="${temp.download}/logstash.zip"
-      destinationDir="${installation.location}"/>
   <setupTask
       xsi:type="downloadtask:DownloadTask"
       id="download.maven"
@@ -146,13 +116,6 @@
     <description>Downloads maven 3.3.9 binaries archive</description>
   </setupTask>
   <setupTask
-      xsi:type="unziptask:UnzipTask"
-      id="unzip.maven"
-      excludedTriggers="STARTUP"
-      predecessor="download.maven"
-      zipFile="${temp.download}/maven.zip"
-      destinationDir="${installation.location}"/>
-  <setupTask
       xsi:type="downloadtask:DownloadTask"
       id="download.tomcat"
       excludedTriggers="STARTUP"
@@ -164,6 +127,43 @@
       estimatedSize="9">
     <description>Downloads tomcat 7.0.68 binaries archive</description>
   </setupTask>
+  <setupTask
+      xsi:type="unziptask:UnzipTask"
+      id="unzip.oasp"
+      excludedTriggers="STARTUP"
+      zipFile="${temp.download}/oasp.zip"
+      destinationDir="${temp.download}"/>
+  <setupTask
+      xsi:type="unziptask:UnzipTask"
+      id="unzip.ant"
+      excludedTriggers="STARTUP"
+      predecessor="download.ant"
+      filter=""
+      zipFile="${temp.download}/ant.zip"
+      destinationDir="${installation.location}">
+    <description>Unzips the ant archive</description>
+  </setupTask>
+  <setupTask
+      xsi:type="unziptask:UnzipTask"
+      id="unzip.elasticsearch"
+      excludedTriggers="STARTUP"
+      predecessor="download.elasticsearch"
+      zipFile="${temp.download}/elasticsearch.zip"
+      destinationDir="${installation.location}"/>
+  <setupTask
+      xsi:type="unziptask:UnzipTask"
+      id="unzip.logstash"
+      excludedTriggers="STARTUP"
+      predecessor="download.logstash"
+      zipFile="${temp.download}/logstash.zip"
+      destinationDir="${installation.location}"/>
+  <setupTask
+      xsi:type="unziptask:UnzipTask"
+      id="unzip.maven"
+      excludedTriggers="STARTUP"
+      predecessor="download.maven"
+      zipFile="${temp.download}/maven.zip"
+      destinationDir="${installation.location}"/>
   <setupTask
       xsi:type="unziptask:UnzipTask"
       id="unzip.tomcat"
@@ -451,22 +451,35 @@
       <description>Downloads the nodejs 4.4.2  x64 exe</description>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
-        id="run.nodejs"
-        excludedTriggers="STARTUP"
-        predecessor="download.nodejs"
-        command="${temp.download.win}\nodejs.exe"/>
-    <setupTask
         xsi:type="downloadtask:DownloadTask"
         id="download.python"
         excludedTriggers="STARTUP"
         resourceLocation="http://ftp.nluug.nl/languages/python/portablepython/v2.7/PortablePython_2.7.6.1.exe"
         isURL="true"
         destinationPath="${temp.download}"
-        destinationFile="python.msi"
+        destinationFile="python.exe"
         estimatedSize="225">
       <description>Downloads the python 2.7.11 amd64 msi</description>
     </setupTask>
+    <setupTask
+        xsi:type="downloadtask:DownloadTask"
+        id="download.help"
+        excludedTriggers="STARTUP"
+        resourceLocation="https://raw.githubusercontent.com/themetalone/oomph-server/master/help.bat"
+        isURL="true"
+        destinationPath="${installation.root}"
+        destinationFile="help.bat"/>
+    <setupTask
+        xsi:type="downloadtask:DownloadTask"
+        id="download.install.report"
+        excludedTriggers="STARTUP"
+        resourceLocation=""/>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="run.nodejs"
+        excludedTriggers="STARTUP"
+        predecessor="download.nodejs"
+        command="${temp.download.win}\nodejs.exe"/>
     <setupTask
         xsi:type="cmd:CmdTask"
         id="run.python"
@@ -519,6 +532,23 @@
       <argument>${installation.location.win}\logstash-2.3.0</argument>
       <argument>logstash</argument>
       <description>rename.logstash</description>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="reorder.nodejs.1"
+        command="xcopy">
+      <argument>${installation.location.win}\nodejs\Data</argument>
+      <argument>${installation.location.win}\nodejs\</argument>
+      <argument>/Y</argument>
+      <argument>/E</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="reorder.nodejs.2"
+        command="xcopy">
+      <argument>${installation.location.win}\nodejs\App\NodeJS</argument>
+      <argument>${installation.location.win}\nodejs\</argument>
+      <argument>/E</argument>
     </setupTask>
     <setupTask
         xsi:type="cmd:CmdTask"
@@ -586,21 +616,8 @@
       <argument>/Y</argument>
     </setupTask>
     <setupTask
-        xsi:type="downloadtask:DownloadTask"
-        id="download.help"
-        excludedTriggers="STARTUP"
-        resourceLocation="https://raw.githubusercontent.com/themetalone/oomph-server/master/help.bat"
-        isURL="true"
-        destinationPath="${installation.root}"
-        destinationFile="help.bat"/>
-    <setupTask
-        xsi:type="downloadtask:DownloadTask"
-        id="download.install.report"
-        excludedTriggers="STARTUP"
-        resourceLocation=""/>
-    <setupTask
         xsi:type="cmd:CmdTask"
-        id="installreport"
+        id="create.installreport"
         excludedTriggers="STARTUP"
         predecessor="download.install.report"
         command="chdir">
@@ -608,6 +625,12 @@
       <argument>&amp;&amp;</argument>
       <argument>install_report_win.bat</argument>
     </setupTask>
+    <setupTask
+        xsi:type="cmd:CmdTask"
+        id="show.installreport"
+        excludedTriggers="STARTUP"
+        predecessor="create.installreport"
+        command="${installation.root}\install.log"/>
     <setupTask
         xsi:type="cmd:CmdTask"
         id="update.all.workspaces"

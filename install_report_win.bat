@@ -1,5 +1,47 @@
 @echo OFF
-echo This is the installation report. Rerun all tasks in Eclipse (Help > Perform Setup Tasks) that are listed below > install.log
+echo This is the installation report. >> install.log
+echo Rerun all tasks in Eclipse (Help > Perform Setup Tasks) that are listed below > install.log
+echo ----------Begin------------ >> install.log
+IF NOT EXIST update-all-workspaces.bat (
+	echo OASP files are missing >> install.log
+	IF NOT EXIST temp\oasp.zip (
+		echo   rerun download.oasp >> install.log
+		)
+	IF NOT EXIST temp\oasp4j-ide-master (
+		echo   rerun unzip.oasp >> install.log
+		)
+	echo   rerun xcopy.oasp.scripts >> install.log
+	)
+
+IF NOT EXIST workspaces\main\development\settings\ide-properties.bat (
+	echo OASP files are missing >> install.log
+	IF NOT EXIST temp\oasp.zip (
+		echo   rerun download.oasp >> install.log
+		)
+	IF NOT EXIST temp\oasp4j-ide-master (
+		echo   rerun unzip.oasp >> install.log
+		)
+	IF NOT EXIST workspaces\main\development\settings\ (
+		echo   rerun mkdir.oasp.settings >> install.log
+		)
+	echo   rerun move.oasp.settings >> install.log
+	)
+
+IF NOT EXIST scripts\oasp4j-ide-eclipse-configurator-1.4.0-SNAPSHOT.jar (
+	echo OASP files are missing >> install.log
+	IF NOT EXIST temp\oasp.zip (
+		echo   rerun download.oasp >> install.log
+		)
+	IF NOT EXIST temp\oasp4j-ide-master (
+		echo   rerun unzip.oasp >> install.log
+		)
+	IF NOT EXIST temp\oasp4j-ide-master\oasp4j-ide-eclipse-configurator\target\ (
+		echo   rerun package.oasp >> install.log
+		)
+	echo   rerun move.oasp.eclipse >> install.log
+	)
+
+
 IF NOT EXIST software\ant\ (
 	echo Ant is missing >> install.log
 	IF NOT EXIST temp\ant.zip (
@@ -40,3 +82,31 @@ IF NOT EXIST software\tomcat\ (
 	echo   rerun unzip.tomcat >> install.log
 	echo   rerun rename.tomcat >> install.log
 	)
+IF NOT EXIST software\nodejs\ (
+	echo nodejs is missing >> install.log
+	IF NOT EXIST temp\nodejs.exe (
+		echo   rerun download.nodejs >> install.log
+		)
+	echo   rerun run.nodejs >> install.log
+	) 
+IF NOT EXIST software\nodejs\node_modules\ (
+	echo nodejs restructuring failed >> install.log
+	echo   rerun reorder.nodejs.1 >> install.log
+	)
+IF NOT EXIST software\nodejs\node.exe (
+	echo nodejs restructuring failed >> install.log
+	echo   rerun reorder.nodejs.2 >> install.log
+	)
+IF NOT EXIST software\python\ (
+	echo python is missing >> install.log
+	IF NOT EXIST temp\python.exe (
+		echo   rerun download.python >> install.log
+		)
+	echo   rerun run.python >> install.log
+	) 
+IF NOT EXIST software\java\ (
+	echo Java is missing >> install.log
+	echo   rerun xcopy.java >> install.log
+	)
+echo -----------End------------- >> install.log
+echo When there is no entry between the two lines your installation is probably complete >> install.log 
