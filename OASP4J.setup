@@ -9,7 +9,7 @@
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
     xmlns:unziptask="http://www.example.org/UnzipTask/1.0"
-    xsi:schemaLocation="http://www.example.org/CommandLine/1.0 file:///C:/oomph/server/model/Commandline-1.0.ecore http://www.example.org/DownloadTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Downloadtask-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.example.org/UnzipTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Unziptask-1.0.ecore"
+    xsi:schemaLocation="http://www.example.org/CommandLine/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Commandline-1.0.ecore http://www.example.org/DownloadTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Downloadtask-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.example.org/UnzipTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Unziptask-1.0.ecore"
     name="oasp4j"
     label="OASP4J">
   <annotation
@@ -451,8 +451,9 @@
         storageURI="scope://Installation"/>
     <setupTask
         xsi:type="setup:VariableTask"
-        name="${eclipse-configurator.version}"
-        value="1.4.0-SNAPSHOT"/>
+        excludedTriggers="BOOTSTRAP MANUAL"
+        name="jre.location-1.7"
+        value="${installation.location}/java/bin"/>
     <setupTask
         xsi:type="downloadtask:DownloadTask"
         id="download.nodejs"
@@ -554,6 +555,7 @@
     <setupTask
         xsi:type="cmd:CmdTask"
         id="reorder.nodejs.1"
+        excludedTriggers="STARTUP"
         command="xcopy">
       <argument>${installation.location.win}\nodejs\App\DefaultData</argument>
       <argument>${installation.location.win}\nodejs\</argument>
@@ -563,6 +565,7 @@
     <setupTask
         xsi:type="cmd:CmdTask"
         id="reorder.nodejs.2"
+        excludedTriggers="STARTUP"
         command="xcopy">
       <argument>${installation.location.win}\nodejs\App\NodeJS</argument>
       <argument>${installation.location.win}\nodejs\</argument>
@@ -583,40 +586,6 @@
         command="move">
       <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-settings\src\main\settings</argument>
       <argument>${oasp.settings}\development\</argument>
-    </setupTask>
-    <setupTask
-        xsi:type="cmd:CmdTask"
-        id="xcopy.oasp.scripts"
-        excludedTriggers="STARTUP"
-        disabled="true"
-        predecessor="unzip.oasp"
-        command="xcopy">
-      <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-scripts\src\main\resources\*</argument>
-      <argument>${installation.root}</argument>
-      <argument>/E</argument>
-    </setupTask>
-    <setupTask
-        xsi:type="cmd:CmdTask"
-        id="package.oasp"
-        excludedTriggers="STARTUP"
-        disabled="true"
-        predecessor="unzip.oasp"
-        command="chdir">
-      <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-eclipse-configurator\</argument>
-      <argument>&amp;&amp;</argument>
-      <argument>${path.maven}</argument>
-      <argument>package</argument>
-      <argument>-B</argument>
-    </setupTask>
-    <setupTask
-        xsi:type="cmd:CmdTask"
-        id="move.oasp.eclipse"
-        excludedTriggers="STARTUP"
-        disabled="true"
-        predecessor="package.oasp"
-        command="move">
-      <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-eclipse-configurator\target\oasp4j-ide-eclipse-configurator-1.4.0-SNAPSHOT.jar</argument>
-      <argument>${installation.root}\scripts</argument>
     </setupTask>
     <setupTask
         xsi:type="cmd:CmdTask"
@@ -641,7 +610,9 @@
         id="create.installreport"
         excludedTriggers="STARTUP"
         predecessor="download.install.report"
-        command="chdir">
+        command="chdir"
+        priority="900">
+      <argument>/D</argument>
       <argument>${installation.root}</argument>
       <argument>&amp;&amp;</argument>
       <argument>install_report_win.bat</argument>
@@ -651,13 +622,19 @@
         id="show.installreport"
         excludedTriggers="STARTUP"
         predecessor="create.installreport"
-        command="${installation.root}\install.log"/>
+        command="chdir">
+      <argument>/D</argument>
+      <argument>${installation.root}</argument>
+      <argument>&amp;&amp;</argument>
+      <argument>install.log</argument>
+    </setupTask>
     <setupTask
         xsi:type="cmd:CmdTask"
         id="update.all.workspaces"
-        predecessor="xcopy.oasp.scripts move.oasp.settings move.oasp.eclipse xcopy.java download.help"
+        predecessor="move.oasp.settings xcopy.java download.help"
         command="chdir"
         priority="1000">
+      <argument>/D</argument>
       <argument>${installation.root}\</argument>
       <argument>&amp;&amp;</argument>
       <argument>help.bat</argument>
