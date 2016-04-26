@@ -69,6 +69,14 @@
       destinationFile="oasp.zip"/>
   <setupTask
       xsi:type="downloadtask:DownloadTask"
+      id="download.oasp.scripts"
+      excludedTriggers="STARTUP"
+      resourceLocation="http://repo1.maven.org/maven2/io/oasp/java/ide/oasp4j-ide-scripts/1.3.1/oasp4j-ide-scripts-1.3.1.zip"
+      isURL="true"
+      destinationPath="${temp.download}"
+      destinationFile="scripts.zip"/>
+  <setupTask
+      xsi:type="downloadtask:DownloadTask"
       id="download.ant"
       excludedTriggers="STARTUP"
       resourceLocation="http://archive.apache.org/dist/ant/binaries/apache-ant-1.9.7-bin.zip"
@@ -133,6 +141,13 @@
       excludedTriggers="STARTUP"
       zipFile="${temp.download}/oasp.zip"
       destinationDir="${temp.download}"/>
+  <setupTask
+      xsi:type="unziptask:UnzipTask"
+      id="unzip.oasp.scripts"
+      excludedTriggers="STARTUP"
+      predecessor="download.oasp.scripts"
+      zipFile="${temp.download}/scripts.zip"
+      destinationDir="${installation.root}"/>
   <setupTask
       xsi:type="unziptask:UnzipTask"
       id="unzip.ant"
@@ -473,7 +488,10 @@
         xsi:type="downloadtask:DownloadTask"
         id="download.install.report"
         excludedTriggers="STARTUP"
-        resourceLocation=""/>
+        resourceLocation="https://raw.githubusercontent.com/themetalone/oomph-server/master/install_report_win.bat"
+        isURL="true"
+        destinationPath="${installation.root}"
+        destinationFile="install_report_win.bat"/>
     <setupTask
         xsi:type="cmd:CmdTask"
         id="run.nodejs"
@@ -537,7 +555,7 @@
         xsi:type="cmd:CmdTask"
         id="reorder.nodejs.1"
         command="xcopy">
-      <argument>${installation.location.win}\nodejs\Data</argument>
+      <argument>${installation.location.win}\nodejs\App\DefaultData</argument>
       <argument>${installation.location.win}\nodejs\</argument>
       <argument>/Y</argument>
       <argument>/E</argument>
@@ -570,6 +588,7 @@
         xsi:type="cmd:CmdTask"
         id="xcopy.oasp.scripts"
         excludedTriggers="STARTUP"
+        disabled="true"
         predecessor="unzip.oasp"
         command="xcopy">
       <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-scripts\src\main\resources\*</argument>
@@ -580,6 +599,7 @@
         xsi:type="cmd:CmdTask"
         id="package.oasp"
         excludedTriggers="STARTUP"
+        disabled="true"
         predecessor="unzip.oasp"
         command="chdir">
       <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-eclipse-configurator\</argument>
@@ -592,6 +612,7 @@
         xsi:type="cmd:CmdTask"
         id="move.oasp.eclipse"
         excludedTriggers="STARTUP"
+        disabled="true"
         predecessor="package.oasp"
         command="move">
       <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-eclipse-configurator\target\oasp4j-ide-eclipse-configurator-1.4.0-SNAPSHOT.jar</argument>

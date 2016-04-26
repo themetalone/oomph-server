@@ -27,21 +27,6 @@ IF NOT EXIST workspaces\main\development\settings\ide-properties.bat (
 	echo   rerun move.oasp.settings >> install.log
 	)
 
-IF NOT EXIST scripts\oasp4j-ide-eclipse-configurator-1.4.0-SNAPSHOT.jar (
-	echo OASP files are missing >> install.log
-	IF NOT EXIST temp\oasp.zip (
-		echo   rerun download.oasp >> install.log
-		)
-	IF NOT EXIST temp\oasp4j-ide-master (
-		echo   rerun unzip.oasp >> install.log
-		)
-	IF NOT EXIST temp\oasp4j-ide-master\oasp4j-ide-eclipse-configurator\target\ (
-		echo   rerun package.oasp >> install.log
-		)
-	echo   rerun move.oasp.eclipse >> install.log
-	)
-
-
 IF NOT EXIST software\ant\ (
 	echo Ant is missing >> install.log
 	IF NOT EXIST temp\ant.zip (
