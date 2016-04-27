@@ -191,7 +191,7 @@
   <setupTask
       xsi:type="jdt:JRETask"
       version="JavaSE-1.7"
-      location="${jre.location-1.7}"/>
+      location="${installation.location}\java"/>
   <setupTask
       xsi:type="setup:InstallationTask"
       id="installation"/>
