@@ -59,9 +59,6 @@
       value="${workspace.container}/master"
       storageURI="scope://Workspace"/>
   <setupTask
-      xsi:type="setup:VariableTask"
-      name="${jre.location-1.7}"/>
-  <setupTask
       xsi:type="downloadtask:DownloadTask"
       id="download.oasp"
       excludedTriggers="STARTUP"
@@ -452,12 +449,6 @@
         name="path.maven"
         value="${installation.location.win}\maven\bin\mvn"
         storageURI="scope://Installation"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        excludedTriggers="BOOTSTRAP MANUAL"
-        name="jre.location-1.7"
-        value="${installation.location}\java"
-        defaultValue=""/>
     <setupTask
         xsi:type="downloadtask:DownloadTask"
         id="download.nodejs"
