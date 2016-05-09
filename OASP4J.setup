@@ -9,7 +9,7 @@
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
     xmlns:unziptask="http://www.example.org/UnzipTask/1.0"
-    xsi:schemaLocation="http://www.example.org/CommandLine/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Commandline-1.0.ecore http://www.example.org/DownloadTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Downloadtask-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.example.org/UnzipTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Unziptask-1.0.ecore"
+    xsi:schemaLocation="http://www.example.org/CommandLine/1.0 http://raw.githubusercontent.com/themetalone/oomph-server/master/model/Commandline-1.0.ecore http://www.example.org/DownloadTask/1.0 http://raw.githubusercontent.com/themetalone/oomph-server/master/model/Downloadtask-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.example.org/UnzipTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Unziptask-1.0.ecore"
     name="oasp4j"
     label="OASP4J">
   <annotation
@@ -288,7 +288,15 @@
         versionRange="[0.8.0,1.0.0)"
         optional="true"/>
     <requirement
+        name="org.springframework.ide.eclipse.ajdt.feature.feature.group"
+        versionRange="[3.6.2,4.0.0)"
+        optional="true"/>
+    <requirement
         name="org.springframework.ide.eclipse.aop.feature.feature.group"
+        versionRange="[3.6.2,4.0.0)"
+        optional="true"/>
+    <requirement
+        name="org.springframework.ide.eclipse.autowire.feature.feature.group"
         versionRange="[3.6.2,4.0.0)"
         optional="true"/>
     <requirement
@@ -296,7 +304,19 @@
         versionRange="[3.6.2,4.0.0)"
         optional="true"/>
     <requirement
+        name="org.springframework.ide.eclipse.boot.dash.feature.feature.group"
+        versionRange="[3.6.2,4.0.0)"
+        optional="true"/>
+    <requirement
+        name="org.springframework.ide.eclipse.data.feature.feature.group"
+        versionRange="[3.6.2,4.0.0)"
+        optional="true"/>
+    <requirement
         name="org.springframework.ide.eclipse.feature.feature.group"
+        versionRange="[3.6.2,4.0.0)"
+        optional="true"/>
+    <requirement
+        name="org.springframework.ide.eclipse.integration.feature.feature.group"
         versionRange="[3.6.2,4.0.0)"
         optional="true"/>
     <requirement
@@ -304,7 +324,15 @@
         versionRange="[3.6.2,4.0.0)"
         optional="true"/>
     <requirement
+        name="org.springframework.ide.eclipse.mylyn.feature.feature.group"
+        versionRange="[3.6.2,4.0.0)"
+        optional="true"/>
+    <requirement
         name="org.springframework.ide.eclipse.security.feature.feature.group"
+        versionRange="[3.6.2,4.0.0)"
+        optional="true"/>
+    <requirement
+        name="org.springframework.ide.eclipse.webflow.feature.feature.group"
         versionRange="[3.6.2,4.0.0)"
         optional="true"/>
     <requirement
