@@ -3,13 +3,13 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:cmd="http://www.example.org/CommandLine/1.0"
+    xmlns:com.github.maybeec.oomph.task="http://maybeec.github.io/oomph-task-cli/1.0"
     xmlns:downloadtask="http://www.example.org/DownloadTask/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
     xmlns:unziptask="http://www.example.org/UnzipTask/1.0"
-    xsi:schemaLocation="http://www.example.org/CommandLine/1.0 http://raw.githubusercontent.com/themetalone/oomph-server/master/model/Commandline-1.0.ecore http://www.example.org/DownloadTask/1.0 http://raw.githubusercontent.com/themetalone/oomph-server/master/model/Downloadtask-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.example.org/UnzipTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Unziptask-1.0.ecore"
+    xsi:schemaLocation="http://maybeec.github.io/oomph-task-cli/1.0 https://raw.githubusercontent.com/maybeec/oomph-task-cli/master/task-cli-updatesite/model/Oomph-cli-task-1.0.ecore http://www.example.org/DownloadTask/1.0 http://raw.githubusercontent.com/themetalone/oomph-server/master/model/Downloadtask-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.example.org/UnzipTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Unziptask-1.0.ecore"
     name="oasp4j"
     label="OASP4J">
   <annotation
@@ -517,19 +517,19 @@
         destinationPath="${installation.root}"
         destinationFile="install_report_win.bat"/>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="run.nodejs"
         excludedTriggers="STARTUP"
         predecessor="download.nodejs"
         command="${temp.download.win}\nodejs.exe"/>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="run.python"
         excludedTriggers="STARTUP"
         predecessor="download.python"
         command="${temp.download.win}\python.exe"/>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="rename.ant"
         excludedTriggers="STARTUP"
         predecessor="unzip.ant"
@@ -538,7 +538,7 @@
       <argument>ant</argument>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="rename.maven"
         excludedTriggers="STARTUP"
         predecessor="unzip.maven"
@@ -547,7 +547,7 @@
       <argument>maven</argument>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="rename.tomcat"
         excludedTriggers="STARTUP"
         predecessor="unzip.tomcat"
@@ -557,7 +557,7 @@
       <description></description>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="rename.elasticsearch"
         excludedTriggers="STARTUP"
         predecessor="unzip.elasticsearch"
@@ -566,7 +566,7 @@
       <argument>elasticsearch</argument>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="rename.logstash"
         excludedTriggers="STARTUP"
         predecessor="unzip.logstash"
@@ -576,7 +576,7 @@
       <description>rename.logstash</description>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="reorder.nodejs.1"
         excludedTriggers="STARTUP"
         command="xcopy">
@@ -586,7 +586,7 @@
       <argument>/E</argument>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="reorder.nodejs.2"
         excludedTriggers="STARTUP"
         command="xcopy">
@@ -595,14 +595,14 @@
       <argument>/E</argument>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="mkdir.oasp.settings"
         excludedTriggers="STARTUP"
         command="mkdir">
       <argument>${workspace.container}\main\development</argument>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="move.oasp.settings"
         excludedTriggers="STARTUP"
         predecessor="unzip.oasp mkdir.oasp.settings"
@@ -611,14 +611,14 @@
       <argument>${oasp.settings}\development\</argument>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="mkdir.software.java"
         excludedTriggers="STARTUP"
         command="mkdir">
       <argument>${installation.location.win}\java\</argument>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="xcopy.java"
         excludedTriggers="STARTUP"
         command="xcopy">
@@ -629,7 +629,7 @@
       <argument>/Y</argument>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="create.installreport"
         excludedTriggers="STARTUP"
         predecessor="download.install.report"
@@ -641,7 +641,7 @@
       <argument>install_report_win.bat</argument>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="show.installreport"
         excludedTriggers="STARTUP"
         predecessor="create.installreport"
@@ -652,7 +652,7 @@
       <argument>install.log</argument>
     </setupTask>
     <setupTask
-        xsi:type="cmd:CmdTask"
+        xsi:type="com.github.maybeec.oomph.task:cliTask"
         id="update.all.workspaces"
         predecessor="move.oasp.settings xcopy.java download.help"
         command="chdir"
