@@ -3,13 +3,13 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:com.github.maybeec.oomph.task="http://maybeec.github.io/oomph-task-cli/1.0"
-    xmlns:downloadtask="http://www.example.org/DownloadTask/1.0"
+    xmlns:cli="http://maybeec.github.io/oomph-task-cli/1.0"
+    xmlns:download="http://www.example.org/task-download/1.0"
+    xmlns:unzip="http://www.example.org/task-unzip/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-    xmlns:unziptask="http://www.example.org/UnzipTask/1.0"
-    xsi:schemaLocation="http://maybeec.github.io/oomph-task-cli/1.0 https://raw.githubusercontent.com/maybeec/oomph-task-cli/master/task-cli-updatesite/model/Oomph-cli-task-1.0.ecore http://www.example.org/DownloadTask/1.0 http://raw.githubusercontent.com/themetalone/oomph-server/master/model/Downloadtask-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.example.org/UnzipTask/1.0 https://raw.githubusercontent.com/themetalone/oomph-server/master/model/Unziptask-1.0.ecore"
+    xsi:schemaLocation="http://maybeec.github.io/oomph-task-cli/1.0 https://raw.githubusercontent.com/maybeec/oomph-task-cli/master/task-cli-updatesite/model/Oomph-cli-task-1.0.ecore http://www.example.org/task-download/1.0 https://raw.githubusercontent.com/maybeec/oomph-task-download/master/task-download-updatesite/model/Task-download-1.0.ecore http://www.example.org/task-unzip/1.0 https://raw.githubusercontent.com/maybeec/oomph-task-download/master/task-download-updatesite/model/Oomph-task-unzip.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore"
     name="oasp4j"
     label="OASP4J">
   <annotation
@@ -59,7 +59,7 @@
       value="${workspace.container}/master"
       storageURI="scope://Workspace"/>
   <setupTask
-      xsi:type="downloadtask:DownloadTask"
+      xsi:type="download:downloadTask"
       id="download.oasp"
       excludedTriggers="STARTUP"
       resourceLocation="https://github.com/oasp/oasp4j-ide/archive/master.zip"
@@ -68,7 +68,7 @@
       destinationPath="${temp.download}"
       destinationFile="oasp.zip"/>
   <setupTask
-      xsi:type="downloadtask:DownloadTask"
+      xsi:type="download:downloadTask"
       id="download.oasp.scripts"
       excludedTriggers="STARTUP"
       resourceLocation="http://repo1.maven.org/maven2/io/oasp/java/ide/oasp4j-ide-scripts/1.3.1/oasp4j-ide-scripts-1.3.1.zip"
@@ -76,7 +76,7 @@
       destinationPath="${temp.download}"
       destinationFile="scripts.zip"/>
   <setupTask
-      xsi:type="downloadtask:DownloadTask"
+      xsi:type="download:downloadTask"
       id="download.ant"
       excludedTriggers="STARTUP"
       resourceLocation="http://archive.apache.org/dist/ant/binaries/apache-ant-1.9.7-bin.zip"
@@ -88,7 +88,7 @@
     <description>Downloads the ant 1.9.7 archive</description>
   </setupTask>
   <setupTask
-      xsi:type="downloadtask:DownloadTask"
+      xsi:type="download:downloadTask"
       id="download.elasticsearch"
       excludedTriggers="STARTUP"
       resourceLocation="https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/2.3.0/elasticsearch-2.3.0.zip"
@@ -100,7 +100,7 @@
     <description>Download the elasticsearch 2.3 archive</description>
   </setupTask>
   <setupTask
-      xsi:type="downloadtask:DownloadTask"
+      xsi:type="download:downloadTask"
       id="download.logstash"
       excludedTriggers="STARTUP"
       resourceLocation="https://download.elastic.co/logstash/logstash/logstash-2.3.0.zip"
@@ -112,7 +112,7 @@
     <description>Downloads logstash 2.3</description>
   </setupTask>
   <setupTask
-      xsi:type="downloadtask:DownloadTask"
+      xsi:type="download:downloadTask"
       id="download.maven"
       excludedTriggers="STARTUP"
       resourceLocation="http://www-us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip"
@@ -124,7 +124,7 @@
     <description>Downloads maven 3.3.9 binaries archive</description>
   </setupTask>
   <setupTask
-      xsi:type="downloadtask:DownloadTask"
+      xsi:type="download:downloadTask"
       id="download.tomcat"
       excludedTriggers="STARTUP"
       resourceLocation="http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.8/bin/apache-tomcat-7.0.8-windows-x64.zip"
@@ -136,20 +136,20 @@
     <description>Downloads tomcat 7.0.68 binaries archive</description>
   </setupTask>
   <setupTask
-      xsi:type="unziptask:UnzipTask"
+      xsi:type="unzip:unzipTask"
       id="unzip.oasp"
       excludedTriggers="STARTUP"
       zipFile="${temp.download}/oasp.zip"
       destinationDir="${temp.download}"/>
   <setupTask
-      xsi:type="unziptask:UnzipTask"
+      xsi:type="unzip:unzipTask"
       id="unzip.oasp.scripts"
       excludedTriggers="STARTUP"
       predecessor="download.oasp.scripts"
       zipFile="${temp.download}/scripts.zip"
       destinationDir="${installation.root}"/>
   <setupTask
-      xsi:type="unziptask:UnzipTask"
+      xsi:type="unzip:unzipTask"
       id="unzip.ant"
       excludedTriggers="STARTUP"
       predecessor="download.ant"
@@ -159,28 +159,28 @@
     <description>Unzips the ant archive</description>
   </setupTask>
   <setupTask
-      xsi:type="unziptask:UnzipTask"
+      xsi:type="unzip:unzipTask"
       id="unzip.elasticsearch"
       excludedTriggers="STARTUP"
       predecessor="download.elasticsearch"
       zipFile="${temp.download}/elasticsearch.zip"
       destinationDir="${installation.location}"/>
   <setupTask
-      xsi:type="unziptask:UnzipTask"
+      xsi:type="unzip:unzipTask"
       id="unzip.logstash"
       excludedTriggers="STARTUP"
       predecessor="download.logstash"
       zipFile="${temp.download}/logstash.zip"
       destinationDir="${installation.location}"/>
   <setupTask
-      xsi:type="unziptask:UnzipTask"
+      xsi:type="unzip:unzipTask"
       id="unzip.maven"
       excludedTriggers="STARTUP"
       predecessor="download.maven"
       zipFile="${temp.download}/maven.zip"
       destinationDir="${installation.location}"/>
   <setupTask
-      xsi:type="unziptask:UnzipTask"
+      xsi:type="unzip:unzipTask"
       id="unzip.tomcat"
       excludedTriggers="STARTUP"
       predecessor="download.tomcat"
@@ -478,7 +478,7 @@
         value="${installation.location.win}\maven\bin\mvn"
         storageURI="scope://Installation"/>
     <setupTask
-        xsi:type="downloadtask:DownloadTask"
+        xsi:type="download:downloadTask"
         id="download.nodejs"
         excludedTriggers="STARTUP"
         resourceLocation="https://github.com/garethflowers/nodejs-portable/releases/download/v4.2.1/NodeJSPortable_4.2.1.paf.exe"
@@ -490,7 +490,7 @@
       <description>Downloads the nodejs 4.4.2  x64 exe</description>
     </setupTask>
     <setupTask
-        xsi:type="downloadtask:DownloadTask"
+        xsi:type="download:downloadTask"
         id="download.python"
         excludedTriggers="STARTUP"
         resourceLocation="http://ftp.nluug.nl/languages/python/portablepython/v2.7/PortablePython_2.7.6.1.exe"
@@ -501,7 +501,7 @@
       <description>Downloads the python 2.7.11 amd64 msi</description>
     </setupTask>
     <setupTask
-        xsi:type="downloadtask:DownloadTask"
+        xsi:type="download:downloadTask"
         id="download.help"
         excludedTriggers="STARTUP"
         resourceLocation="https://raw.githubusercontent.com/themetalone/oomph-server/master/help.bat"
@@ -509,7 +509,7 @@
         destinationPath="${installation.root}"
         destinationFile="help.bat"/>
     <setupTask
-        xsi:type="downloadtask:DownloadTask"
+        xsi:type="download:downloadTask"
         id="download.install.report"
         excludedTriggers="STARTUP"
         resourceLocation="https://raw.githubusercontent.com/themetalone/oomph-server/master/install_report_win.bat"
@@ -517,19 +517,19 @@
         destinationPath="${installation.root}"
         destinationFile="install_report_win.bat"/>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="run.nodejs"
         excludedTriggers="STARTUP"
         predecessor="download.nodejs"
         command="${temp.download.win}\nodejs.exe"/>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="run.python"
         excludedTriggers="STARTUP"
         predecessor="download.python"
         command="${temp.download.win}\python.exe"/>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="rename.ant"
         excludedTriggers="STARTUP"
         predecessor="unzip.ant"
@@ -538,7 +538,7 @@
       <argument>ant</argument>
     </setupTask>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="rename.maven"
         excludedTriggers="STARTUP"
         predecessor="unzip.maven"
@@ -547,7 +547,7 @@
       <argument>maven</argument>
     </setupTask>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="rename.tomcat"
         excludedTriggers="STARTUP"
         predecessor="unzip.tomcat"
@@ -557,7 +557,7 @@
       <description></description>
     </setupTask>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="rename.elasticsearch"
         excludedTriggers="STARTUP"
         predecessor="unzip.elasticsearch"
@@ -566,7 +566,7 @@
       <argument>elasticsearch</argument>
     </setupTask>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="rename.logstash"
         excludedTriggers="STARTUP"
         predecessor="unzip.logstash"
@@ -576,7 +576,7 @@
       <description>rename.logstash</description>
     </setupTask>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="reorder.nodejs.1"
         excludedTriggers="STARTUP"
         command="xcopy">
@@ -586,7 +586,7 @@
       <argument>/E</argument>
     </setupTask>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="reorder.nodejs.2"
         excludedTriggers="STARTUP"
         command="xcopy">
@@ -595,14 +595,14 @@
       <argument>/E</argument>
     </setupTask>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="mkdir.oasp.settings"
         excludedTriggers="STARTUP"
         command="mkdir">
       <argument>${workspace.container}\main\development</argument>
     </setupTask>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="move.oasp.settings"
         excludedTriggers="STARTUP"
         predecessor="unzip.oasp mkdir.oasp.settings"
@@ -611,14 +611,14 @@
       <argument>${oasp.settings}\development\</argument>
     </setupTask>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="mkdir.software.java"
         excludedTriggers="STARTUP"
         command="mkdir">
       <argument>${installation.location.win}\java\</argument>
     </setupTask>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="xcopy.java"
         excludedTriggers="STARTUP"
         command="xcopy">
@@ -629,7 +629,7 @@
       <argument>/Y</argument>
     </setupTask>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="create.installreport"
         excludedTriggers="STARTUP"
         predecessor="download.install.report"
@@ -641,7 +641,7 @@
       <argument>install_report_win.bat</argument>
     </setupTask>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="show.installreport"
         excludedTriggers="STARTUP"
         predecessor="create.installreport"
@@ -652,7 +652,7 @@
       <argument>install.log</argument>
     </setupTask>
     <setupTask
-        xsi:type="com.github.maybeec.oomph.task:cliTask"
+        xsi:type="cli:cliTask"
         id="update.all.workspaces"
         predecessor="move.oasp.settings xcopy.java download.help"
         command="chdir"
@@ -664,5 +664,5 @@
     </setupTask>
     <description>OASP4J for Mars.</description>
   </version>
-  <description>OASP4J provides cool stuff.</description>
+  <description>OASP4J</description>
 </setup:Product>
