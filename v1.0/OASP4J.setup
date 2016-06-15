@@ -3,13 +3,13 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:com.github.maybeec.oomph.task="http://www.example.org/task-download/1.0"
+    xmlns:com.github.maybeec.oomph.task="http://maybeec.github.io/oomph-task-download/1.0"
     xmlns:com.github.maybeec.oomph.task_1="http://www.example.org/task-unzip/1.0"
     xmlns:com.github.maybeec.oomph.task_2="http://maybeec.github.io/oomph-task-cli/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-    xsi:schemaLocation="http://www.example.org/task-download/1.0 https://raw.githubusercontent.com/maybeec/oomph-task-download/master/task-download-updatesite/model/Oomph-task-download.ecore http://www.example.org/task-unzip/1.0 https://raw.githubusercontent.com/maybeec/oomph-task-unzip/master/task-unzip-updatesite/model/Oomph-task-unzip.ecore http://maybeec.github.io/oomph-task-cli/1.0 https://raw.githubusercontent.com/maybeec/oomph-task-cli/master/task-cli-updatesite/model/Oomph-cli-task-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore"
+    xsi:schemaLocation="http://maybeec.github.io/oomph-task-download/1.0 https://raw.githubusercontent.com/maybeec/oomph-task-download/master/task-download-updatesite/model/Oomph-task-download.ecore http://www.example.org/task-unzip/1.0 https://raw.githubusercontent.com/maybeec/oomph-task-download/master/task-download-updatesite/model/Oomph-task-unzip.ecore http://maybeec.github.io/oomph-task-cli/1.0 https://raw.githubusercontent.com/maybeec/oomph-task-cli/master/task-cli-updatesite/model/Oomph-cli-task-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore"
     name="oasp4j"
     label="OASP4J">
   <annotation
@@ -66,7 +66,8 @@
       isURL="true"
       readTimeout="5000"
       destinationPath="${temp.download}"
-      destinationFile="oasp4j.zip">
+      destinationFile="oasp4j.zip"
+      priority="100">
     <description>Downloads the main zip file for the OASP4J</description>
   </setupTask>
   <setupTask
@@ -77,7 +78,8 @@
       isURL="true"
       readTimeout="5000"
       destinationPath="${temp.download}"
-      destinationFile="scripts.zip">
+      destinationFile="scripts.zip"
+      priority="100">
     <description>Downloads the scripts for the OASP4j</description>
   </setupTask>
   <setupTask
@@ -89,6 +91,7 @@
       readTimeout="5000"
       destinationPath="${temp.download}"
       destinationFile="ant.zip"
+      priority="100"
       estimatedSize="8">
     <description>Downloads the ant binaries as zip file</description>
   </setupTask>
@@ -101,6 +104,7 @@
       readTimeout="5000"
       destinationPath="${temp.download}"
       destinationFile="elasticsearch.zip"
+      priority="100"
       estimatedSize="27">
     <description>Downloads the elasticsearch binaries as zip file</description>
   </setupTask>
@@ -113,6 +117,7 @@
       readTimeout="5000"
       destinationPath="${temp.download}"
       destinationFile="logstash.zip"
+      priority="100"
       estimatedSize="77">
     <description>Downloads the logstash binaries as zip file</description>
   </setupTask>
@@ -125,6 +130,7 @@
       readTimeout="5000"
       destinationPath="${temp.download}"
       destinationFile="maven.zip"
+      priority="100"
       estimatedSize="8">
     <description>Downloads the maven binaries as a zip file</description>
   </setupTask>
@@ -137,6 +143,7 @@
       readTimeout="5000"
       destinationPath="${temp.download}"
       destinationFile="tomcat.zip"
+      priority="100"
       estimatedSize="9">
     <description>Downloads the tomcat binaries as zip file</description>
   </setupTask>
@@ -146,7 +153,8 @@
       excludedTriggers="STARTUP"
       predecessor="download.oasp"
       zipFile="${temp.download}/oasp.zip"
-      destinationDir="${temp.download}">
+      destinationDir="${temp.download}"
+      priority="100">
     <description>Unzips the oasp into the supposed folder</description>
   </setupTask>
   <setupTask
@@ -155,7 +163,8 @@
       excludedTriggers="STARTUP"
       predecessor="download.oasp.scripts"
       zipFile="${temp.download}/scripts.zip"
-      destinationDir="${installation.root}">
+      destinationDir="${installation.root}"
+      priority="100">
     <description></description>
   </setupTask>
   <setupTask
@@ -164,7 +173,8 @@
       excludedTriggers="STARTUP"
       predecessor="download.ant"
       zipFile="${temp.download}/ant.zip"
-      destinationDir="${installation.location}">
+      destinationDir="${installation.location}"
+      priority="100">
     <description>Unzips the ant binaries</description>
   </setupTask>
   <setupTask
@@ -173,7 +183,8 @@
       excludedTriggers="STARTUP"
       predecessor="download.elasticsearch"
       zipFile="${temp.download}/elasticsearch.zip"
-      destinationDir="${installation.location}">
+      destinationDir="${installation.location}"
+      priority="100">
     <description>unzips the elasticsearch binaries</description>
   </setupTask>
   <setupTask
@@ -182,7 +193,8 @@
       excludedTriggers="STARTUP"
       predecessor="download.logstash"
       zipFile="${temp.download}/logstash.zip"
-      destinationDir="${installation.location}">
+      destinationDir="${installation.location}"
+      priority="100">
     <description>Unzips the logstash binaries</description>
   </setupTask>
   <setupTask
@@ -191,7 +203,8 @@
       excludedTriggers="STARTUP"
       predecessor="download.maven"
       zipFile="${temp.download}/maven.zip"
-      destinationDir="${installation.location}">
+      destinationDir="${installation.location}"
+      priority="100">
     <description>Unzips the maven binaries</description>
   </setupTask>
   <setupTask
@@ -200,7 +213,8 @@
       excludedTriggers="STARTUP"
       predecessor="download.tomcat"
       zipFile="${temp.download}/tomcat.zip"
-      destinationDir="${installation.location}">
+      destinationDir="${installation.location}"
+      priority="100">
     <description>Unzips the tomcat binaries</description>
   </setupTask>
   <setupTask
@@ -485,6 +499,7 @@
         readTimeout="5000"
         destinationPath="${temp.download}"
         destinationFile="node.exe"
+        priority="100"
         estimatedSize="6">
       <description>Downloads a nodejs installer</description>
     </setupTask>
@@ -497,6 +512,7 @@
         readTimeout="5000"
         destinationPath="${temp.download}"
         destinationFile="python.exe"
+        priority="100"
         estimatedSize="225">
       <description>Downloads the python installable</description>
     </setupTask>
@@ -508,7 +524,8 @@
         isURL="true"
         readTimeout="5000"
         destinationPath="${installation.root}"
-        destinationFile="help.bar">
+        destinationFile="help.bar"
+        priority="100">
       <description>Downloads a helper script</description>
     </setupTask>
     <setupTask
@@ -518,7 +535,8 @@
         resourceLocation="https://raw.githubusercontent.com/themetalone/oomph-server/master/install_report_win.bat"
         readTimeout="5000"
         destinationPath="${installation.root}"
-        destinationFile="install_report_win.bat">
+        destinationFile="install_report_win.bat"
+        priority="100">
       <description>Downloads the install report script</description>
     </setupTask>
     <setupTask
@@ -526,7 +544,8 @@
         id="run.node"
         excludedTriggers="STARTUP"
         predecessor="download.win.nodejs"
-        command="${temp.download.win}\nodejs.exe">
+        command="${temp.download.win}\nodejs.exe"
+        priority="100">
       <description>executes the nodejs installer</description>
     </setupTask>
     <setupTask
@@ -534,7 +553,8 @@
         id="run.python"
         excludedTriggers="STARTUP"
         predecessor="download.win.python"
-        command="${temp.download.win}\python.exe">
+        command="${temp.download.win}\python.exe"
+        priority="100">
       <description>runs the python installer</description>
     </setupTask>
     <setupTask
@@ -542,7 +562,8 @@
         id="rename.ant"
         excludedTriggers="STARTUP"
         predecessor="unzip.ant"
-        command="rename">
+        command="rename"
+        priority="100">
       <argument>${installation.location.win}\apache-ant-1.9.7</argument>
       <argument>ant</argument>
       <description>renames the ant directory to match the oasps settings</description>
@@ -552,7 +573,8 @@
         id="rename.maven"
         excludedTriggers="STARTUP"
         predecessor="unzip.maven"
-        command="rename">
+        command="rename"
+        priority="100">
       <argument>${installation.location.win}\apache-maven-3.9.9</argument>
       <argument>maven</argument>
       <description>Rename the maven directory to plain maven</description>
@@ -562,7 +584,8 @@
         id="rename.tomcat"
         excludedTriggers="STARTUP"
         predecessor="unzip.tomcat"
-        command="rename">
+        command="rename"
+        priority="100">
       <argument>${installation.location.win}\apache-tomcat-7.0.8</argument>
       <argument>tomcat</argument>
       <description>renames the tomcat directory</description>
@@ -571,7 +594,8 @@
         xsi:type="com.github.maybeec.oomph.task_2:cliTask"
         id="rename.elasticsearch"
         predecessor="unzip.elasticsearch"
-        command="rename">
+        command="rename"
+        priority="100">
       <argument>${installation.location.win}\elasticsearch-2.3.0</argument>
       <argument>elasticsearch</argument>
     </setupTask>
@@ -580,7 +604,8 @@
         id="rename.logstash"
         excludedTriggers="STARTUP"
         predecessor="unzip.logstash"
-        command="rename">
+        command="rename"
+        priority="100">
       <argument>${installation.location.win}\logstash-2.3.0</argument>
       <argument>logstash</argument>
       <description></description>
@@ -590,7 +615,8 @@
         id="reorder.nodejs.1"
         excludedTriggers="STARTUP"
         predecessor="run.node"
-        command="xcopy">
+        command="xcopy"
+        priority="100">
       <argument>${installation.location.win}\nodejs\App\DefaultData\</argument>
       <argument>${installation.location.win}\nodejs</argument>
       <argument>/Y</argument>
@@ -601,7 +627,8 @@
         id="reorder.nodejs.2"
         excludedTriggers="STARTUP"
         predecessor="reorder.nodejs.1"
-        command="xcopy">
+        command="xcopy"
+        priority="100">
       <argument>${installation.location.win}\nodejs\App\NodeJS\</argument>
       <argument>${installation.location.win}\nodejs\</argument>
       <argument>/E</argument>
@@ -611,7 +638,8 @@
         id="mkdir.oasp.settings"
         excludedTriggers="STARTUP"
         predecessor="unzip.oasp.scripts"
-        command="mkdir">
+        command="mkdir"
+        priority="100">
       <argument>${workspace.container}\main\development</argument>
     </setupTask>
     <setupTask
@@ -619,7 +647,8 @@
         id="move.oasp.settings"
         excludedTriggers="STARTUP"
         predecessor="mkdir.oasp.settings"
-        command="move">
+        command="move"
+        priority="100">
       <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-settings\src\main\settings</argument>
       <argument>${oasp.settings}\development\</argument>
     </setupTask>
@@ -628,7 +657,8 @@
         id="mkdir.software.java"
         excludedTriggers="STARTUP"
         predecessor="//@setupTasks.21"
-        command="mkdir">
+        command="mkdir"
+        priority="100">
       <argument>${installation.location.win}\java\</argument>
     </setupTask>
     <setupTask
@@ -636,7 +666,8 @@
         id="xcopy.java"
         excludedTriggers="STARTUP"
         predecessor="mkdir.software.java"
-        command="xcopy">
+        command="xcopy"
+        priority="100">
       <argument>${jre.location-1.7}\*</argument>
       <argument>${installation.location.win}\java\</argument>
       <argument>/E</argument>
@@ -648,7 +679,8 @@
         id="create.installreport"
         excludedTriggers="STARTUP"
         predecessor="download.win.install_report.bat"
-        command="chdir">
+        command="chdir"
+        priority="1000">
       <argument>/D</argument>
       <argument>&amp;&amp;</argument>
       <argument>install_report_win.bat</argument>
@@ -670,7 +702,8 @@
         id="update.workspaces"
         excludedTriggers="STARTUP"
         predecessor="unzip.oasp.scripts"
-        command="chdir">
+        command="chdir"
+        priority="1000">
       <argument>/D</argument>
       <argument>${installation.root}</argument>
       <argument>&amp;&amp;</argument>
