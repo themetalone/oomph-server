@@ -3,10 +3,10 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:com.github.maybeec.oomph.task="http://www.example.org/task-unzip/1.0"
+    xmlns:com.github.maybeec.oomph.task="http://maybeec.github.io/oomph-task-unzip/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-    xsi:schemaLocation="http://www.example.org/task-unzip/1.0 https://raw.githubusercontent.com/maybeec/oomph-task-download/master/task-download-updatesite/model/Oomph-task-unzip.ecore"
+    xsi:schemaLocation="http://maybeec.github.io/oomph-task-unzip/1.0 https://raw.githubusercontent.com/maybeec/oomph-task-unzip/master/task-unzip-updatesite/model/Oomph-task-unzip.ecore"
     name="unzip"
     label="unzip">
   <annotation

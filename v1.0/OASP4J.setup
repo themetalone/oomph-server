@@ -429,7 +429,7 @@
     <repository
         url="http://eclipse-cs.sf.net/update/"/>
     <repository
-        url="http://eclipse.tmatesoft.com/svnkit/1.8.x/"/>
+        url="http://eclipse.svnkit.com/1.8.x/"/>
     <repository
         url="http://findbugs.cs.umd.edu/eclipse/"/>
     <repository
@@ -533,6 +533,7 @@
         id="download.win.install_report.bat"
         excludedTriggers="STARTUP"
         resourceLocation="https://raw.githubusercontent.com/themetalone/oomph-server/master/install_report_win.bat"
+        isURL="true"
         readTimeout="5000"
         destinationPath="${installation.root}"
         destinationFile="install_report_win.bat"
