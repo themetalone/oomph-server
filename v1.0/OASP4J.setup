@@ -545,7 +545,7 @@
         id="run.node"
         excludedTriggers="STARTUP"
         predecessor="download.win.nodejs"
-        command="${temp.download.win}\nodejs.exe"
+        command="${temp.download.win}\node.exe"
         priority="100">
       <description>executes the nodejs installer</description>
     </setupTask>
