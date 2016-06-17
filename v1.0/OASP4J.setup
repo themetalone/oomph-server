@@ -524,7 +524,7 @@
         isURL="true"
         readTimeout="5000"
         destinationPath="${installation.root}"
-        destinationFile="help.bar"
+        destinationFile="help.bat"
         priority="100">
       <description>Downloads a helper script</description>
     </setupTask>
