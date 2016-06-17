@@ -581,7 +581,7 @@
         predecessor="unzip.maven"
         command="rename"
         priority="100">
-      <argument>${installation.location.win}\apache-maven-3.9.9</argument>
+      <argument>${installation.location.win}\apache-maven-3.3.9</argument>
       <argument>maven</argument>
       <description>Rename the maven directory to plain maven</description>
     </setupTask>
