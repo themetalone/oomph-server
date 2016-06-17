@@ -642,7 +642,7 @@
         predecessor="download.win.nodejs"
         command="mkdir"
         priority="100">
-      <argument>${workspace.container}\software\nodejs</argument>
+      <argument>${installation.location.win}\software\nodejs</argument>
     </setupTask>
     <setupTask
         xsi:type="com.github.maybeec.oomph.task_2:cliTask"
@@ -652,7 +652,7 @@
         command="move"
         priority="100">
       <argument>${temp.download.win}\nodejs-portable.bat</argument>
-      <argument>${workspace.container}\software\nodejs\</argument>
+      <argument>${installation.location.win}\software\nodejs\</argument>
     </setupTask>
     <setupTask
         xsi:type="com.github.maybeec.oomph.task_2:cliTask"
