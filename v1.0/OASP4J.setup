@@ -499,11 +499,11 @@
         xsi:type="com.github.maybeec.oomph.task:downloadTask"
         id="download.win.nodejs"
         excludedTriggers="STARTUP"
-        resourceLocation="https://github.com/garethflowers/nodejs-portable/releases/download/v4.2.1/NodeJSPortable_4.2.1.paf.exe"
+        resourceLocation="https://github.com/maybeec/nodejs-portable/releases/download/v1.11/nodejs-portable.bat"
         isURL="true"
         readTimeout="5000"
         destinationPath="${temp.download}"
-        destinationFile="node.exe"
+        destinationFile="nodejs-portable.bat"
         priority="100"
         estimatedSize="6">
       <description>Downloads a nodejs installer</description>
@@ -550,7 +550,7 @@
         id="run.node"
         excludedTriggers="STARTUP"
         predecessor="download.win.nodejs"
-        command="${temp.download.win}\node.exe"
+        command="${temp.download.win}\nodejs-portable.bat 2 4.4.5 x64"
         priority="100">
       <description>executes the nodejs installer</description>
     </setupTask>
@@ -615,29 +615,6 @@
       <argument>${installation.location.win}\logstash-2.3.0</argument>
       <argument>logstash</argument>
       <description></description>
-    </setupTask>
-    <setupTask
-        xsi:type="com.github.maybeec.oomph.task_2:cliTask"
-        id="reorder.nodejs.1"
-        excludedTriggers="STARTUP"
-        predecessor="run.node"
-        command="xcopy"
-        priority="100">
-      <argument>${installation.location.win}\nodejs\App\DefaultData\</argument>
-      <argument>${installation.location.win}\nodejs</argument>
-      <argument>/Y</argument>
-      <argument>/E</argument>
-    </setupTask>
-    <setupTask
-        xsi:type="com.github.maybeec.oomph.task_2:cliTask"
-        id="reorder.nodejs.2"
-        excludedTriggers="STARTUP"
-        predecessor="reorder.nodejs.1"
-        command="xcopy"
-        priority="100">
-      <argument>${installation.location.win}\nodejs\App\NodeJS\</argument>
-      <argument>${installation.location.win}\nodejs\</argument>
-      <argument>/E</argument>
     </setupTask>
     <setupTask
         xsi:type="com.github.maybeec.oomph.task_2:cliTask"
