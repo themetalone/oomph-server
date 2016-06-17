@@ -152,7 +152,7 @@
       id="unzip.oasp"
       excludedTriggers="STARTUP"
       predecessor="download.oasp"
-      zipFile="${temp.download}/oasp.zip"
+      zipFile="${temp.download}/oasp4j.zip"
       destinationDir="${temp.download}"
       priority="100">
     <description>Unzips the oasp into the supposed folder</description>
