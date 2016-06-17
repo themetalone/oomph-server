@@ -222,6 +222,7 @@
       id="installation"/>
   <setupTask
       xsi:type="jdt:JRETask"
+      disabled="true"
       version="JavaSE-1.7"
       location="${installation.location}\java"/>
   <setupTask
@@ -455,6 +456,10 @@
     <repository
         url="https://basti1302.github.com/startexplorer/update/"/>
   </setupTask>
+  <setupTask
+      xsi:type="jdt:JRETask"
+      version="JavaSE-1.7"
+      location="${jre.location-1.7}"/>
   <version name="Mars for Windows"
       label="Mars Windows x64"
       requiredJavaVersion="1.7">
@@ -657,6 +662,7 @@
         xsi:type="com.github.maybeec.oomph.task_2:cliTask"
         id="mkdir.software.java"
         excludedTriggers="STARTUP"
+        disabled="true"
         predecessor="//@setupTasks.21"
         command="mkdir"
         priority="100">
@@ -666,6 +672,7 @@
         xsi:type="com.github.maybeec.oomph.task_2:cliTask"
         id="xcopy.java"
         excludedTriggers="STARTUP"
+        disabled="true"
         predecessor="mkdir.software.java"
         command="xcopy"
         priority="100">
