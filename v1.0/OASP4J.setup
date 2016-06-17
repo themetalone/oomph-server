@@ -549,8 +549,8 @@
         xsi:type="com.github.maybeec.oomph.task_2:cliTask"
         id="run.node"
         excludedTriggers="STARTUP"
-        predecessor="download.win.nodejs"
-        command="${temp.download.win}\nodejs-portable.bat 2 4.4.5 x64"
+        predecessor="move.nodejs.setupfile"
+        command="${installation.root}\software\nodejs\nodejs-portable.bat 2 4.4.5 x64"
         priority="100">
       <description>executes the nodejs installer</description>
     </setupTask>
@@ -634,6 +634,25 @@
         priority="100">
       <argument>${temp.download.win}\oasp4j-ide-master\oasp4j-ide-settings\src\main\settings</argument>
       <argument>${oasp.settings}\development\</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="com.github.maybeec.oomph.task_2:cliTask"
+        id="mkdir.nodejs.folder"
+        excludedTriggers="STARTUP"
+        predecessor="download.win.nodejs"
+        command="mkdir"
+        priority="100">
+      <argument>${workspace.container}\software\nodejs</argument>
+    </setupTask>
+    <setupTask
+        xsi:type="com.github.maybeec.oomph.task_2:cliTask"
+        id="move.nodejs.setupfile"
+        excludedTriggers="STARTUP"
+        predecessor="mkdir.nodejs.folder"
+        command="move"
+        priority="100">
+      <argument>${temp.download.win}\nodejs-portable.bat</argument>
+      <argument>${workspace.container}\software\nodejs\</argument>
     </setupTask>
     <setupTask
         xsi:type="com.github.maybeec.oomph.task_2:cliTask"
