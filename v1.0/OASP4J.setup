@@ -662,7 +662,7 @@
         xsi:type="com.github.maybeec.oomph.task_2:cliTask"
         id="mkdir.software.java"
         excludedTriggers="STARTUP"
-        disabled="true"
+        disabled="false"
         predecessor="//@setupTasks.21"
         command="mkdir"
         priority="100">
@@ -672,7 +672,7 @@
         xsi:type="com.github.maybeec.oomph.task_2:cliTask"
         id="xcopy.java"
         excludedTriggers="STARTUP"
-        disabled="true"
+        disabled="false"
         predecessor="mkdir.software.java"
         command="xcopy"
         priority="100">
