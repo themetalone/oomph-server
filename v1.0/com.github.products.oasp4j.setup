@@ -22,6 +22,11 @@
   <setupTask
       xsi:type="setup:InstallationTask"
       id="installation"/>
+  <setupTask
+      xsi:type="setup:RedirectionTask"
+      id="oomph.redirection.oasp"
+      sourceURL="index:/redirectable.products.setup"
+      targetURL="https://raw.githubusercontent.com/themetalone/oomph-server/master/v1.0/com.github.products.oasp4j.setup"/>
   <product name="oasp4j"
       label="OASP4J">
     <annotation
@@ -651,9 +656,6 @@
       </setupTask>
       <description></description>
     </setupTask>
-    <setupTask
-        xsi:type="setup:InstallationTask"
-        id="installation"/>
     <setupTask
         xsi:type="setup.p2:P2Task"
         label="${scope.product.label} (${scope.product.version.label})">
