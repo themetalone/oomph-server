@@ -20,5 +20,6 @@
   <product href="http://git.eclipse.org/c/cdo/cdo.git/plain/plugins/org.eclipse.emf.cdo.server.product/CDOServer.setup#/"/>
   <product href="http://git.eclipse.org/c/cdo/cdo.git/plain/plugins/org.eclipse.emf.cdo.explorer.ui/CDOExplorer.setup#/"/>
   <product href="interim/products/PapyrusWithCDO.setup#/"/>
+  <product href="https://raw.githubusercontent.com/themetalone/oomph-server/master/v1.0/OASP4J.setup#"/>
   <description>The catalog of applications provided by projects at Eclipse.org.</description>
 </setup:ProductCatalog>
