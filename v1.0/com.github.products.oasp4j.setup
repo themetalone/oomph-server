@@ -39,9 +39,6 @@
           key="folderName.macosx">
         <value>Eclipse</value>
       </detail>
-    </annotation>
-    <annotation
-        source="http://www.eclipse.org/oomph/setup/BrandingInfo">
       <detail key="imageURI">
         <value>https://raw.githubusercontent.com/themetalone/oomph-server/master/resources/oasp-logo.png</value>
       </detail>
