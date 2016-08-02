@@ -892,6 +892,14 @@
           key="folderName.macosx">
         <value>Eclipse</value>
       </detail>
+      <detail
+          key="imageURI">
+        <value>https://raw.githubusercontent.com/themetalone/oomph-server/master/resources/oasp-logo.png</value>
+      </detail>
+      <detail
+          key="siteURI">
+        <value>https://oasp.github.io/</value>
+      </detail>
     </annotation>
     <version
         name="Mars"
@@ -956,6 +964,14 @@
       <detail
           key="folderName.macosx">
         <value>Eclipse</value>
+      </detail>
+      <detail
+          key="imageURI">
+        <value>https://raw.githubusercontent.com/themetalone/oomph-server/master/resources/oasp-logo.png</value>
+      </detail>
+      <detail
+          key="siteURI">
+        <value>https://oasp.github.io/</value>
       </detail>
     </annotation>
     <setupTask
