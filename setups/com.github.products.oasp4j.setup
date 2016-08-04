@@ -469,7 +469,7 @@
           id="move.settings"
           predecessor="unzip.oasp.scripts"
           resource="${tmp.download.location/oasp4j-ide-master/oasp4j-ide-settings/src/main/settings}"
-          destination="${settings.location/development/}"
+          destination="${settings.location/development/settings}"
           priority="100"/>
       <setupTask
           xsi:type="com.github.maybeec.oomph.task_2:cliTask"
