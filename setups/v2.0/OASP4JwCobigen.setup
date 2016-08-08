@@ -892,6 +892,16 @@
       xsi:type="jdt:JRETask"
       version="JavaSE-1.7"
       location="${jre.location-1.7}"/>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      id="p2.cobigen"
+      label="P2 Cobigen">
+    <requirement
+        name="cobigen-eclipse-feature.feature.group"
+        versionRange="[1.4.3,2.0.0)"/>
+    <repository
+        url="jar:file:////de-file10/ClientPE/OASP/CobiGenerator/Releases/stable/cobigen-eclipse.zip!/"/>
+  </setupTask>
   <version name="Mars"
       label="Mars"
       requiredJavaVersion="1.7">
