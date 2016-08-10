@@ -50,12 +50,12 @@
     <setupTask
         xsi:type="setup:VariableTask"
         id="software.is64"
+        excludedTriggers="STARTUP"
         type="BOOLEAN"
         name="software.is64"
-        defaultValue="true"
         storageURI="scope://Installation"
         label="64-Bit Software">
-      <description></description>
+      <description>Specifies if the software to be downloaded is 64bit or 32bit</description>
     </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
