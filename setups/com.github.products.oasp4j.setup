@@ -49,9 +49,9 @@
       name="version config of non-eclipse resources">
     <setupTask
         xsi:type="setup:VariableTask"
-        id="software.is64"
+        id="software.is.sixtyfour"
         excludedTriggers="STARTUP"
-        name="software.is64"
+        name="software.is.sixtyfour"
         defaultValue="true"
         storageURI="scope://Installation"
         label="64-Bit Software">
@@ -284,7 +284,7 @@
       <setupTask
           xsi:type="setup:CompoundTask"
           id="tasks.download.external.ressources.windows.x64"
-          filter="(software.is64=true)"
+          filter="(software.is.sixtyfour=true)"
           name="x64">
         <setupTask
             xsi:type="com.github.maybeec.oomph.task:downloadTask"
@@ -333,7 +333,7 @@
       <setupTask
           xsi:type="setup:CompoundTask"
           id="tasks.download.external.ressources.windows.x32"
-          filter="(software.is64=false)"
+          filter="(software.is.sixtyfour=false)"
           name="x32">
         <setupTask
             xsi:type="com.github.maybeec.oomph.task:downloadTask"
