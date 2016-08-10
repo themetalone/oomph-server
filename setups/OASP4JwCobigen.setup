@@ -841,8 +841,6 @@
     <repository
         url="http://download.eclipse.org/mylyn/releases/3.17"/>
     <repository
-        url="http://download.eclipse.org/mylyn/releases/luna"/>
-    <repository
         url="http://download.eclipse.org/mylyn/snapshots/3.13"/>
     <repository
         url="http://download.eclipse.org/oomph/updates/milestone/latest"/>
@@ -858,8 +856,6 @@
         url="http://download.eclipse.org/tm/updates/3.7"/>
     <repository
         url="http://download.eclipse.org/tools/gef/updates/releases"/>
-    <repository
-        url="http://download.eclipse.org/webtools/repository/luna"/>
     <repository
         url="http://download.eclipse.org/webtools/updates"/>
     <repository
@@ -924,6 +920,10 @@
           name="org.eclipse.rcp.feature.group"/>
       <repository
           url="http://download.eclipse.org/releases/mars"/>
+      <repository
+          url="http://download.eclipse.org/mylyn/releases/mars"/>
+      <repository
+          url="http://download.eclipse.org/webtools/repository/mars"/>
     </setupTask>
     <description>OASP4J for Mars.</description>
   </version>
@@ -940,6 +940,10 @@
           name="org.eclipse.rcp.feature.group"/>
       <repository
           url="http://download.eclipse.org/releases/luna"/>
+      <repository
+          url="http://download.eclipse.org/mylyn/releases/luna"/>
+      <repository
+          url="http://download.eclipse.org/webtools/repository/luna"/>
     </setupTask>
     <description>OASP4J for Luna</description>
   </version>
@@ -956,6 +960,10 @@
           name="org.eclipse.rcp.feature.group"/>
       <repository
           url="http://download.eclipse.org/releases/neon"/>
+      <repository
+          url="http://download.eclipse.org/mylyn/releases/neon"/>
+      <repository
+          url="http://download.eclipse.org/webtools/repository/neon"/>
     </setupTask>
     <description>OASP4J for Neon (Experimental)</description>
   </version>
