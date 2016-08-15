@@ -371,6 +371,89 @@
       </setupTask>
       <description>Download tasks for external ressources on windows</description>
     </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        id="tasks.download.external.ressources.linux"
+        filter="(osgi.os=linux)"
+        name="linux">
+      <setupTask
+          xsi:type="com.github.maybeec.oomph.task:downloadTask"
+          id="download.tomcat"
+          excludedTriggers="STARTUP"
+          filter=""
+          resourceLocation="http://archive.apache.org/dist/tomcat/tomcat-7/v${tomcat.version}/bin/apache-tomcat-${tomcat.version}.zip"
+          isURL="true"
+          readTimeout="5000"
+          destinationPath="${tmp.download.location}"
+          destinationFile="apache-tomcat-${tomcat.version}.zip"
+          priority="100"
+          estimatedSize="9">
+        <description>Downloads the tomcat binaries as zip file</description>
+      </setupTask>
+      <setupTask
+          xsi:type="com.github.maybeec.oomph.task:downloadTask"
+          id="download.linux.python"
+          excludedTriggers="STARTUP"
+          filter=""
+          resourceLocation="https://www.python.org/ftp/python/${python.version}/python-${python.version}.tgz"
+          isURL="true"
+          readTimeout="5000"
+          destinationPath="${tmp.download.location}"
+          destinationFile="python-${python.version}.tgz"
+          priority="100"
+          estimatedSize="15">
+        <description>Downloads the python installable</description>
+      </setupTask>
+      <setupTask
+          xsi:type="com.github.maybeec.oomph.task:downloadTask"
+          id="download.linux.oasp.scripts"
+          excludedTriggers="STARTUP"
+          resourceLocation="https://github.com/themetalone/oomph-setups/raw/master/resources/oasp4j-ide-scripts-linux.zip"
+          isURL="true"
+          destinationPath="${tmp.download.location}"
+          destinationFile="oasp4j-ide-scripts-${oasp.scripts.version}.zip"
+          priority="100"/>
+      <setupTask
+          xsi:type="setup:CompoundTask"
+          id="tasks.download.external.ressources.linux.x64"
+          filter="(osgi.arch=x86_64)"
+          name="x64">
+        <setupTask
+            xsi:type="com.github.maybeec.oomph.task:downloadTask"
+            id="download.linux.nodejs"
+            excludedTriggers="STARTUP"
+            filter=""
+            resourceLocation="https://nodejs.org/dist/v${nodejs.version}/node-v${nodejs.version}-linux-x64.tar.gz"
+            isURL="true"
+            readTimeout="5000"
+            destinationPath="${tmp.download.location}"
+            destinationFile="node-v${nodejs.version}.tgz"
+            priority="100"
+            estimatedSize="6">
+          <description>Downloads a nodejs installer</description>
+        </setupTask>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:CompoundTask"
+          id="tasks.download.external.ressources.linux.x32"
+          filter="(osgi.arch=x86)"
+          name="x32">
+        <setupTask
+            xsi:type="com.github.maybeec.oomph.task:downloadTask"
+            id="download.linux.nodejs"
+            excludedTriggers="STARTUP"
+            filter=""
+            resourceLocation="https://nodejs.org/dist/v${nodejs.version}/node-v${nodejs.version}-linux-x86.tar.gz"
+            isURL="true"
+            readTimeout="5000"
+            destinationPath="${tmp.download.location}"
+            destinationFile="node-v${nodejs.version}.tgz"
+            priority="100"
+            estimatedSize="6">
+          <description>Downloads a nodejs installer</description>
+        </setupTask>
+      </setupTask>
+    </setupTask>
     <description>downloads external resources</description>
   </setupTask>
   <setupTask
@@ -437,21 +520,25 @@
       <description>Unzips the tomcat binaries</description>
     </setupTask>
     <setupTask
+        xsi:type="com.github.maybeec.oomph.task_1:unzipTask"
+        id="unzip.oasp.scripts"
+        excludedTriggers="STARTUP"
+        predecessor="compound.downloads"
+        zipFile="${tmp.download.location/}oasp4j-ide-scripts-${oasp.scripts.version}.zip"
+        destinationDir="${installation.root}"
+        priority="100">
+      <description></description>
+    </setupTask>
+    <setupTask
         xsi:type="setup:CompoundTask"
         id="tasks.unzip.external.resources.win"
         filter="(os.name=Windows*)"
-        name="Windows">
-      <setupTask
-          xsi:type="com.github.maybeec.oomph.task_1:unzipTask"
-          id="unzip.oasp.scripts"
-          excludedTriggers="STARTUP"
-          predecessor="download.oasp.scripts"
-          zipFile="${tmp.download.location/}oasp4j-ide-scripts-${oasp.scripts.version}.zip"
-          destinationDir="${installation.root}"
-          priority="100">
-        <description></description>
-      </setupTask>
-    </setupTask>
+        name="Windows"/>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        id="tasks.download.external.ressources.linux"
+        filter="(osgi.os=linux)"
+        name="linux"/>
     <description></description>
   </setupTask>
   <setupTask
